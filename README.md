@@ -8,31 +8,76 @@
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
 <a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
 <a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
 
-This project was created with NestJS. For use, please follow the installation and the running steps.
+This project was created with NestJS, Docker and MySQL. For use, please follow the installation and the running steps.
 
 ## Installation
+
+Installing nodejs
+<a href="https://nodejs.org/en/download" target="_blank"><img src="https://imgur.com/VRL6erP" alt="nodejs download" /></a>
+
+Installing nestjs:
+
+```bash
+$ npm i -g @nestjs/cli
+```
+
+The npm command installs all the modules need it within the project:
 
 ```bash
 $ npm install
 ```
 
+Installing Docker on windows:
+<a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank"><img src="https://imgur.com/PgdzSa8" alt="docker download" /></a>
+
+Docker is better to run as administrator.
+
+Installing MySQL Workbench:
+<a href="https://www.mysql.com/downloads/" target="_blank"><img src="https://imgur.com/z1pLC5E" alt="mysql download" /></a>
+
+Installing MySQL Server:
+<a href="https://www.mysql.com/downloads/" target="_blank"><img src="https://imgur.com/z1pLC5E" alt="mysql server download" /></a>
+
+## Commit messages
+
+An efficent way for us to organize the repository, please use the Semantic Commit Messages before commiting a change:
+
+Example:
+
+feat: add hat wobble
+^--^ ^------------^
+| |
+| +-> Summary in present tense.
+|
++-------> Type: chore, docs, feat, fix, refactor, style, or test.
+
+More Examples:
+
+feat: (new feature for the user, not a new feature for build script)
+fix: (bug fix for the user, not a fix to a build script)
+docs: (changes to the documentation)
+style: (formatting, missing semi colons, etc; no production code change)
+refactor: (refactoring production code, eg. renaming a variable)
+test: (adding missing tests, refactoring tests; no production code change)
+chore: (updating grunt tasks etc; no production code change)
+
+for more information: <a href="https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716" target="_blank">
+
+## Branches
+
+Each developer have its own branch to work with. Please, DO NOT work in the masters branch, if any mistakes are made, it can be difficult to fix if worked within the master branch.
+
+Also, after making any commit, it's important to go and ask for a pull request directly in the github repository. Resolving merged conflict it's a MUST every time a dev commits.
+
 ## Running the app
+
+Nestjs:
 
 ```bash
 # development
@@ -43,6 +88,15 @@ $ npm run start:dev
 
 # production mode
 $ npm run start:prod
+```
+
+TIP: For development is better to use "npm run start:dev". This command allows the developer to watch the changes in real-time, meaning, there won't be need to exit the program to
+save changes and run the app again so it can show them.
+
+Docker:
+
+```bash
+$ docker-compose up -d
 ```
 
 ## Test
@@ -57,10 +111,6 @@ $ npm run test:e2e
 # test coverage
 $ npm run test:cov
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## License
 
