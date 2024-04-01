@@ -42,7 +42,7 @@ Installing MySQL Workbench:
 <a href="https://www.mysql.com/downloads/" target="_blank"><img src="https://imgur.com/z1pLC5E" alt="mysql download" /></a>
 
 Installing MySQL Server:
-<a href="https://www.mysql.com/downloads/" target="_blank"><img src="https://imgur.com/z1pLC5E" alt="mysql server download" /></a>
+<a href="[https://www.mysql.com/downloads/](https://dev.mysql.com/downloads/mysql/)" target="_blank"><img src="https://imgur.com/z1pLC5E" alt="mysql server download" /></a>
 
 ## Commit messages
 
