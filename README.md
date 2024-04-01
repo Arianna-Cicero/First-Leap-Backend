@@ -18,8 +18,8 @@ This project was created with NestJS, Docker and MySQL. For use, please follow t
 
 ## Installation
 
-Installing nodejs
-<a href="https://nodejs.org/en/download" target="_blank"><img src="https://imgur.com/VRL6erP" alt="nodejs download" /></a>
+Installing nodejs:
+<a href="https://nodejs.org/en/download" target="_blank">Nodejs🟢</a>
 
 Installing nestjs:
 
@@ -34,15 +34,14 @@ $ npm install
 ```
 
 Installing Docker on windows:
-<a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank"><img src="https://imgur.com/PgdzSa8" alt="docker download" /></a>
-
+<a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank">Docker🐋</a><br>
 Docker is better to run as administrator.
 
 Installing MySQL Workbench:
-<a href="https://www.mysql.com/downloads/" target="_blank"><img src="https://imgur.com/z1pLC5E" alt="mysql download" /></a>
+<a href="https://www.mysql.com/downloads/" target="_blank">MySQL Workbench 🐬</a>
 
 Installing MySQL Server:
-<a href="[https://www.mysql.com/downloads/](https://dev.mysql.com/downloads/mysql/)" target="_blank"><img src="https://imgur.com/z1pLC5E" alt="mysql server download" /></a>
+<a href="https://dev.mysql.com/downloads/mysql/" target="_blank">MySQL Server 🐬</a>
 
 ## Commit messages
 
@@ -50,12 +49,12 @@ An efficent way for us to organize the repository, please use the Semantic Commi
 
 Example:
 
-feat: add hat wobble
-^--^ ^------------^
-| |
-| +-> Summary in present tense.
-|
-+-------> Type: chore, docs, feat, fix, refactor, style, or test.
+feat: add hat wobble<br>
+^--^ ^------------^<br>
+| |<br>
+| +-> Summary in present tense.<br>
+|<br>
++-------> Type: chore, docs, feat, fix, refactor, style, or test.<br>
 
 More Examples:
 
@@ -67,7 +66,7 @@ refactor: (refactoring production code, eg. renaming a variable)
 test: (adding missing tests, refactoring tests; no production code change)
 chore: (updating grunt tasks etc; no production code change)
 
-for more information: <a href="https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716" target="_blank">
+for more information: <a href="https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716" target="_blank">click here</a>
 
 ## Branches
 
