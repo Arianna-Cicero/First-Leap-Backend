@@ -6,12 +6,14 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 
 import { UtilizadorModule } from './resources/utilizador/utilizador.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     DatabaseModule,
     UtilizadorModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
