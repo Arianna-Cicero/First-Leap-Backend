@@ -12,14 +12,12 @@ class AuthController {
     const { email, verificationCode } = req.body;
 
     try {
-      // Find user by email
       const user = await this.userService.findByEmail(email);
 
       if (!user) {
         return res.status(404).json({ message: 'User not found.' });
       }
 
-      // Verify the provided code against the stored code
       const isCodeValid = this.verificationService.verifyCode(
         email,
         verificationCode,
@@ -29,7 +27,6 @@ class AuthController {
         return res.status(400).json({ message: 'Invalid verification code.' });
       }
 
-      // Mark the user as verified
       user.verified = true;
       await user.save();
 
