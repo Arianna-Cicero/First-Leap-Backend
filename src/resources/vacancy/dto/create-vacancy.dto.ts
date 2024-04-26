@@ -1,1 +1,4 @@
-export class CreateVacancyDto {}
+export class CreateVacancyDto {
+
+    
+}

@@ -1,33 +1,42 @@
+import { Admin } from "src/resources/admin/entities/admin.entity";
 import { Candidate } from "src/resources/candidate/entities/candidate.entity";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Recruiter } from "src/resources/recruiter/entities/recruiter.entity";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Utilizador {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({type: 'int'})
     User_id : number;
 
-    @Column({nullable : false})
+    @Column({type: 'char', length: 50, nullable : false})
     name : string;
 
-    @Column({nullable : false})
+    @Column({type: 'char', length: 50, nullable : false})
     username : string;
 
-    @Column({nullable : false})
+    @Column({type: 'char', length: 50, nullable : false})
     password : string;
 
-    @Column({nullable : false})
+    @Column({type: 'int', nullable : false})
     permisson : number;
 
-    @Column({nullable: false})
+    @Column({type: 'int', nullable : false})
     number: number;
 
-    @Column({nullable : false})
+    @Column({type: 'char', length: 50, nullable : false})
     email : string;
 
-    @Column({nullable : false})
+    @Column({type: 'date', nullable : false})
     birth_date : Date;
 
-    candidate: Candidate
+    @OneToMany(() => Candidate, (candidate) => candidate.utilizador)
+    candidate: Candidate[];
+
+    @OneToMany(() => Admin, (admin) => admin.utilizador)
+    admin: Admin[];
+
+    @OneToMany(() => Recruiter, (recruiter) => recruiter.utilizador)
+    recruiter: Recruiter[];
 
     constructor (utilizador: Partial<Utilizador>) {
         Object.assign(this, utilizador)

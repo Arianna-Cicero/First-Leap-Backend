@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Candidacy } from "src/resources/candidacy/entities/candidacy.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Result {
@@ -13,5 +14,8 @@ export class Result {
 
     @Column({type: 'timestamp'})
     evaluation_date: Date;
+
+    @OneToMany(() => Candidacy, (candidacy) => candidacy.result)
+    candidacy: Candidacy[]
 
 }
