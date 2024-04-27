@@ -12,8 +12,6 @@ export class Admin {
     @ManyToOne(() => Utilizador, (utilizador) => utilizador.admin)
     utilizador: Utilizador;
 
-    
-
     constructor (admin: Partial<Admin>) {
         Object.assign(this, admin)
     }

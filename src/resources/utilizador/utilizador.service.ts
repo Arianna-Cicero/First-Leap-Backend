@@ -4,6 +4,7 @@ import { UpdateUtilizadorDto } from './dto/update-utilizador.dto';
 import { EntityManager, Repository, FindOneOptions } from 'typeorm';
 import { Utilizador } from './entities/utilizador.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { encodePassword } from 'src/auth/bcrypt';
 
 @Injectable()
 export class UtilizadorService {
@@ -13,7 +14,8 @@ export class UtilizadorService {
   ){}
 
   async create(createUtilizadorDto: CreateUtilizadorDto) {
-    const utilizador = new Utilizador(createUtilizadorDto);
+    const password = encodePassword(createUtilizadorDto.password);
+    const utilizador = new Utilizador({... createUtilizadorDto, password});
     await this.entityManager.save(utilizador);
   }
 
