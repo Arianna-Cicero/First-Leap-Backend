@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
 import { APP_FILTER } from '@nestjs/core';
 import { GlobalExceptionFilter } from './exceptions/global-exception.filter';
+import { DatabaseService } from './services/database.service';
 
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }), DatabaseModule],
@@ -12,7 +13,7 @@ import { GlobalExceptionFilter } from './exceptions/global-exception.filter';
   providers: [
     { provide: APP_FILTER, useClass: GlobalExceptionFilter },
     AppService,
-    DatabaseService,
+    DatabaseService
   ],
 })
 export class AppModule {}

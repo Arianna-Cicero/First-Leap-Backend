@@ -1,8 +1,8 @@
-<<<<<<< HEAD
 import { Admin } from "src/resources/admin/entities/admin.entity";
 import { Candidate } from "src/resources/candidate/entities/candidate.entity";
+import { Emailverification } from "src/resources/emailverification/entities/emailverification.entity";
 import { Recruiter } from "src/resources/recruiter/entities/recruiter.entity";
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Utilizador {
@@ -38,42 +38,12 @@ export class Utilizador {
 
     @OneToMany(() => Recruiter, (recruiter) => recruiter.utilizador)
     recruiter: Recruiter[];
-=======
-import { Emailverification } from 'src/resources/emailverification/entities/emailverification.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-
-@Entity()
-export class Utilizador {
-  @PrimaryGeneratedColumn()
-  User_id: number;
-
-  @Column({ nullable: false })
-  name: string;
-
-  @Column({ nullable: false })
-  username: string;
-
-  @Column({ nullable: false })
-  password: string;
-
-  @Column({ nullable: false })
-  permisson: number;
-
-  @Column({ nullable: false })
-  number: number;
-
-  @Column({ nullable: false })
-  email: string;
-
-  @Column({ nullable: false })
-  birth_date: Date;
-
-  @ManyToOne(
+    
+    @ManyToOne(
     () => Emailverification,
     (emailverificaiton) => emailverificaiton.utilizador,
-  )
-  emailverification: Emailverification;
->>>>>>> origin/master
+    )
+    emailverification: Emailverification;
 
   constructor(utilizador: Partial<Utilizador>) {
     Object.assign(this, utilizador);
