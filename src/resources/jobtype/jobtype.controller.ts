@@ -1,34 +1,45 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { JobtypeService } from './jobtype.service';
-import { CreateJobtypeDto } from './dto/create-jobtype.dto';
-import { UpdateJobtypeDto } from './dto/update-jobtype.dto';
+import { CreateJobTypeDto } from './dto/create-jobtype.dto';
+import { UpdateJobTypeDto } from './dto/update-jobtype.dto';
 
 @Controller('jobtype')
 export class JobtypeController {
   constructor(private readonly jobtypeService: JobtypeService) {}
 
   @Post()
-  create(@Body() createJobtypeDto: CreateJobtypeDto) {
-    return this.jobtypeService.create(createJobtypeDto);
+  async create(@Body() createJobTypeDto: CreateJobTypeDto) {
+    return this.jobtypeService.create(createJobTypeDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.jobtypeService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.jobtypeService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateJobtypeDto: UpdateJobtypeDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateJobtypeDto: UpdateJobTypeDto,
+  ) {
     return this.jobtypeService.update(+id, updateJobtypeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.jobtypeService.remove(+id);
   }
 }

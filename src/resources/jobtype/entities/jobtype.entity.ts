@@ -9,8 +9,8 @@ export class JobType {
   @Column({ type: 'char', length: 50 })
   jobtype_desc: string;
 
-  @OneToMany(() => JobOffer, (joboffer) => joboffer.jobtype)
-  joboffer: JobOffer[];
+  @OneToMany(() => JobOffer, (jobOffer) => jobOffer.jobType, { cascade: true })
+  jobOffers: JobOffer[];
 
   constructor(jobtype: Partial<JobType>) {
     Object.assign(this, jobtype);

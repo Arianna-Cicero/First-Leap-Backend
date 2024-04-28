@@ -26,22 +26,4 @@ export class CreateJobOfferDto {
   @IsString()
   @Max(15)
   status: string;
-
-  constructor(
-    JO: number = null,
-    title: string = '',
-    description: string = '',
-    requisites: string = '',
-    responsibilities: string = '',
-    benefits: string = '',
-    status: string = '',
-  ) {
-    this.JO = JO;
-    this.title = title;
-    this.description = description;
-    this.requisites = requisites;
-    this.responsibilities = responsibilities;
-    this.benefits = benefits;
-    this.status = status;
-  }
 }
