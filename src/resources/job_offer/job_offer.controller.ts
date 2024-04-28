@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { JobOfferService } from './job_offer.service';
 import { CreateJobOfferDto } from './dto/create-job_offer.dto';
 import { UpdateJobOfferDto } from './dto/update-job_offer.dto';
@@ -8,27 +16,30 @@ export class JobOfferController {
   constructor(private readonly jobOfferService: JobOfferService) {}
 
   @Post()
-  create(@Body() createJobOfferDto: CreateJobOfferDto) {
+  async create(@Body() createJobOfferDto: CreateJobOfferDto) {
     return this.jobOfferService.create(createJobOfferDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.jobOfferService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {
     return this.jobOfferService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateJobOfferDto: UpdateJobOfferDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateJobOfferDto: UpdateJobOfferDto,
+  ) {
     return this.jobOfferService.update(+id, updateJobOfferDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.jobOfferService.remove(+id);
   }
 }

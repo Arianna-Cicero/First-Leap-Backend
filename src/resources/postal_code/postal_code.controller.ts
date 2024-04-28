@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { PostalCodeService } from './postal_code.service';
 import { CreatePostalCodeDto } from './dto/create-postal_code.dto';
 import { UpdatePostalCodeDto } from './dto/update-postal_code.dto';
@@ -8,22 +16,25 @@ export class PostalCodeController {
   constructor(private readonly postalCodeService: PostalCodeService) {}
 
   @Post()
-  create(@Body() createPostalCodeDto: CreatePostalCodeDto) {
+  async create(@Body() createPostalCodeDto: CreatePostalCodeDto) {
     return this.postalCodeService.create(createPostalCodeDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.postalCodeService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.postalCodeService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostalCodeDto: UpdatePostalCodeDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updatePostalCodeDto: UpdatePostalCodeDto,
+  ) {
     return this.postalCodeService.update(+id, updatePostalCodeDto);
   }
 
