@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
+<<<<<<< HEAD
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
 import { Address } from 'src/resources/address/entities/address.entity';
 import { Candidacy } from 'src/resources/candidacy/entities/candidacy.entity';
@@ -18,6 +19,9 @@ import { SelectionPhase } from 'src/resources/selection_phase/entities/selection
 import { SelectionProcess } from 'src/resources/selection_process/entities/selection_process.entity';
 import { Vacancy } from 'src/resources/vacancy/entities/vacancy.entity';
 import { Admin } from 'src/resources/admin/entities/admin.entity';
+=======
+import { DatabaseService } from 'src/services/database.service';
+>>>>>>> origin/master
 
 @Module({
   imports: [
@@ -37,5 +41,7 @@ import { Admin } from 'src/resources/admin/entities/admin.entity';
       inject: [ConfigService],
     }),
   ],
+  providers: [DatabaseService],
+  exports: [DatabaseService],
 })
 export class DatabaseModule {}

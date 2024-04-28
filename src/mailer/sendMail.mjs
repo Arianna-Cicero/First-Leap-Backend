@@ -12,15 +12,14 @@ const transporter = nodemailer.createTransport({
 
 const sendMail = async (to, subject, text, html) => {
   const mailOptions = {
-    from: process.env.USER, // Sender address
-    to: to, // Recipient address
-    subject: subject, // Subject line
-    text: text, // Plain text body
-    html: html, // HTML body
+    from: process.env.USER,
+    to: to,
+    subject: subject,
+    text: text,
+    html: html,
   };
 
   try {
-    // Send mail with defined transport object
     await transporter.sendMail(mailOptions);
     console.log('Email Sent');
   } catch (error) {
@@ -29,7 +28,7 @@ const sendMail = async (to, subject, text, html) => {
 };
 
 sendMail(
-  ['ariannacicero@protonmail.com'],
+  ['xyz@xyz.com'],
   'verification codes',
   'heres your verification code 123123',
   '<b>congrats!!</b>',

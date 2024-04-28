@@ -1,26 +1,46 @@
 import { Injectable } from '@nestjs/common';
 import { CreateEmailverificationDto } from './dto/create-emailverification.dto';
 import { UpdateEmailverificationDto } from './dto/update-emailverification.dto';
+import { EntityManager, Repository } from 'typeorm';
+import { Emailverification } from './entities/emailverification.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class EmailverificationService {
-  create(createEmailverificationDto: CreateEmailverificationDto) {
-    return 'This action adds a new emailverification';
+  constructor(
+    @InjectRepository(Emailverification)
+    private readonly emailRepository: Repository<Emailverification>,
+    private readonly entityManager: EntityManager,
+  ) {}
+  async create(createEmailverificationDto: CreateEmailverificationDto) {
+    const emailverification = new Emailverification(createEmailverificationDto);
+    await this.entityManager.save(emailverification);
+    return 'nuevo emailverification adicionado';
   }
 
-  findAll() {
-    return `This action returns all emailverification`;
+  async findAll() {
+    return await this.emailRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} emailverification`;
+  async findOne(id: number) {
+    return await this.emailRepository.find({
+      where: {
+        email_ver_id: id,
+      },
+    });
   }
 
-  update(id: number, updateEmailverificationDto: UpdateEmailverificationDto) {
-    return `This action updates a #${id} emailverification`;
+  async update(
+    id: number,
+    updateEmailverificationDto: UpdateEmailverificationDto,
+  ) {
+    const update = new Emailverification(updateEmailverificationDto);
+    await this.emailRepository.save(update);
+    return `emailverification de ID#${id} modificado`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} emailverification`;
+  async remove(id: number) {
+    await this.emailRepository.delete(id);
+    return `emailverification de ID #${id} eliminado`;
   }
 }

@@ -1,12 +1,11 @@
-import { IsString, IsInt, Min, MinLength, MaxLength } from 'class-validator';
+import { IsInt, IsString, MaxLength, MinLength } from 'class-validator';
 
-export class CreateJobtypeDto {
-    @IsInt()
-    @Min(1)
-    type_id: number;
-    
-    @IsString()
-    @MinLength(1)
-    @MaxLength(250)
-    jobtype_desc: string;
+export class CreateJobTypeDto {
+  @IsInt()
+  type_id: number;
+
+  @IsString()
+  @MaxLength(250)
+  @MinLength(1)
+  jobtype_desc: string;
 }
