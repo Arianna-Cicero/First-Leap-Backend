@@ -12,22 +12,19 @@ import { PostalCodeModule } from './resources/postal_code/postal_code.module';
 import { JobOfferModule } from './resources/job_offer/job_offer.module';
 import { JobtypeModule } from './resources/jobtype/jobtype.module';
 import { UtilizadorModule } from './resources/utilizador/utilizador.module';
-
 @Module({
-  imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    DatabaseModule,
+  imports: [ConfigModule.forRoot({ isGlobal: true }), DatabaseModule,
     // EmailverificationModule,
     PostalCodeModule,
     JobOfferModule,
     JobtypeModule,
     // UtilizadorModule,
   ],
-  controllers: [AppController, HealthController],
+  controllers: [AppController,  HealthController],
   providers: [
     { provide: APP_FILTER, useClass: GlobalExceptionFilter },
     AppService,
-    DatabaseService,
+    DatabaseService
   ],
 })
 export class AppModule {}
