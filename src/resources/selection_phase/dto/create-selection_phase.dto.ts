@@ -1,22 +1,23 @@
-import { IsString, IsInt, MinLength, MaxLength } from 'class-validator';
+import { IsString, IsInt,Min, MinLength, MaxLength } from 'class-validator';
 
-export class CreateSelectionprocessDto {
+export class CreateSelectionphaseDto {
     @IsInt()
-    SP : number;
+    SPH : number;
 
     @IsString()
     @MinLength(1)
     @MaxLength(250)
     description: string;
 
-    @IsString()
-    @MinLength(1)
-    @MaxLength(250)
-    vacancies: string;
+    @IsInt()
+    @Min(1)
+    order : number;
 
     @IsString()
     @MinLength(1)
     @MaxLength(250)
-    phase: string;
+    process: string;
 
+    @IsInt()
+    Selection_ProcessSP_id: number;
 }

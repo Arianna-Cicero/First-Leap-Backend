@@ -1,4 +1,4 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateSelectionprocessDto } from './create-selection_process.dto';
+import { CreateFeedbackDto } from './create-feedback.dto';
 
-export class UpdateSelectionprocessDto extends PartialType(CreateSelectionprocessDto) {}
+export class UpdateFeedbackDto extends PartialType(CreateFeedbackDto) {}

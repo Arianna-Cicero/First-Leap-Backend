@@ -1,22 +1,16 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { JobType } from 'src/resources/jobtype/entities/jobtype.entity';
+import { SelectionPhase } from 'src/resources/selection_phase/entities/selection_phase.entity'; 
 
-@Entity()
-export class Emailverification {
+export class Feedback {
   @PrimaryGeneratedColumn({ type: 'int' })
-  email_ver_id: number;
+  feedback_id: number;
 
-  @Column({ type: 'int', length: 6 })
-  Verification_code: number;
+  @Column({ type: 'char', length: 250 })
+  feedback_desc: string;
 
-  @Column({ type: Date })
-  expiry_datetime: Date;
-
-  //   @OneToMany(() => Utilizador, (utilizador) => utilizador.emailverification)
-  //   utilizador: Utilizador[];
-
-
-    constructor (candidate: Partial<Candidate>) {
-        Object.assign(this, candidate)
-    }
-
+  @ManyToOne(() => SelectionPhase, selectionPhase => selectionPhase.feedback)
+  SelectionPhase: SelectionPhase;
 }
+
+
