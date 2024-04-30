@@ -4,18 +4,19 @@ import { UpdateUtilizadorDto } from './dto/update-utilizador.dto';
 import { EntityManager, Repository, FindOneOptions } from 'typeorm';
 import { Utilizador } from './entities/utilizador.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { encodePassword } from 'src/auth/bcrypt';
+// import { encodePassword } from 'src/auth/bcrypt';
 
 @Injectable()
 export class UtilizadorService {
-  constructor (
+  constructor(
+    @InjectRepository(Utilizador)
+    private userRepository: Repository<Utilizador>,
     private readonly entityManager: EntityManager,
-    @InjectRepository(Utilizador) private userRepository: Repository <Utilizador>,
-  ){}
+  ) {}
 
   async create(createUtilizadorDto: CreateUtilizadorDto) {
-    const password = encodePassword(createUtilizadorDto.password);
-    const utilizador = new Utilizador({... createUtilizadorDto, password});
+    // const password = encodePassword(createUtilizadorDto.password);
+    const utilizador = new Utilizador({ ...createUtilizadorDto });
     await this.entityManager.save(utilizador);
   }
 
@@ -24,19 +25,35 @@ export class UtilizadorService {
     return this.userRepository.findOne(options);
   }
 
-  findAll() {
-    return `This action returns all utilizador`;
+  async findAll() {
+    return await this.userRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} utilizador`;
+  async findOne(id: number) {
+    return await this.userRepository.find({
+      where: {
+        User_id: id,
+      },
+    });
   }
 
-  update(id: number, updateUtilizadorDto: UpdateUtilizadorDto) {
-    return `This action updates a #${id} utilizador`;
+  async update(
+    id: number,
+    updateUtilizadorDto: UpdateUtilizadorDto,
+  ): Promise<Utilizador> {
+    await this.userRepository.update(id, updateUtilizadorDto);
+    const updatedUser = await this.userRepository.findOne({
+      where: { User_id: id },
+    });
+    this.userRepository.find;
+    if (!updatedUser) {
+      throw new Error('User not found');
+    }
+    return updatedUser;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} utilizador`;
-  }
+  // async remove(id: number) {
+  //   await this.userRepository.delete(id);
+  //   return `utilizador de ID #${id} eliminado`;
+  // }
 }

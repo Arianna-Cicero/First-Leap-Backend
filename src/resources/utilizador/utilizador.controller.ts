@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { UtilizadorService } from './utilizador.service';
 import { CreateUtilizadorDto } from './dto/create-utilizador.dto';
 import { UpdateUtilizadorDto } from './dto/update-utilizador.dto';
@@ -13,22 +21,25 @@ export class UtilizadorController {
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.utilizadorService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.utilizadorService.findOne(+id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUtilizadorDto: UpdateUtilizadorDto) {
+  async update(
+    @Param('id') id: string,
+    @Body() updateUtilizadorDto: UpdateUtilizadorDto,
+  ) {
     return this.utilizadorService.update(+id, updateUtilizadorDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.utilizadorService.remove(+id);
-  }
+  // @Delete(':id')
+  // async remove(@Param('id') id: string) {
+  //   return this.utilizadorService.remove(+id);
+  // }
 }
