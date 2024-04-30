@@ -20,7 +20,7 @@ export class RecruiterService {
     return `This action updates a #${id} recruiter`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} recruiter`;
-  }
+  // remove(id: number) {
+  //   return `This action removes a #${id} recruiter`;
+  // }
 }

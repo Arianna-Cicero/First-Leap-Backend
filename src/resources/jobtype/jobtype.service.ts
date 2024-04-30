@@ -30,13 +30,23 @@ export class JobtypeService {
     });
   }
 
-  async update(id: number, updateJobTypeDto: UpdateJobTypeDto) {
-    const update = new JobType(updateJobTypeDto);
-    await this.jobtypeRepository.save(update);
-    return `jobtype de ID #${id} modificada`;
+  async update(
+    id: number,
+    updateJobTypeDto: UpdateJobTypeDto,
+  ): Promise<JobType> {
+    await this.jobtypeRepository.update(id, updateJobTypeDto);
+    const updatedType = await this.jobtypeRepository.findOne({
+      where: { type_id: id },
+    });
+    this.jobtypeRepository.find;
+    if (!updatedType) {
+      throw new Error('Utilizador no encontrado');
+    }
+    return updatedType;
   }
 
   async remove(id: number) {
-    return this.jobtypeRepository.delete(id);
+    await this.jobtypeRepository.delete(id);
+    return `jobtype de ID #${id} eliminado`;
   }
 }
