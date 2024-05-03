@@ -8,8 +8,9 @@ import {
   Min,
   MaxLength,
 } from 'class-validator';
+import { LoginDto } from 'src/auth/dto/login.dto';
 
-export class CreateUtilizadorDto {
+export class CreateUtilizadorDto extends LoginDto {
   @IsInt()
   @Min(1)
   User_id: number;
@@ -19,15 +20,15 @@ export class CreateUtilizadorDto {
   @MaxLength(50)
   name: string;
 
-  @IsString()
-  @MinLength(1)
-  @MaxLength(50)
-  username: string;
+  // @IsString()
+  // @MinLength(1)
+  // @MaxLength(50)
+  // username: string;
 
-  @IsString()
-  @MinLength(1)
-  @MaxLength(50)
-  password: string;
+  // @IsString()
+  // @MinLength(1)
+  // @MaxLength(50)
+  // password: string;
 
   @IsInt()
   @Min(1)

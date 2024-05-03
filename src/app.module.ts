@@ -35,6 +35,7 @@ import { CompanyModule } from './resources/company/company.module';
     AuthModule,
     AddressModule,
     CompanyModule,
+    AuthModule,
   ],
   controllers: [AppController, HealthController],
   providers: [
