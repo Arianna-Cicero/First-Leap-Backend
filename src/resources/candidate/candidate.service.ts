@@ -7,6 +7,10 @@ import { EntityManager, Repository } from 'typeorm';
 
 @Injectable()
 export class CandidateService {
+  create(createCandidateDto: CreateCandidateDto) {
+    return 'This action adds a new candidate';
+  }
+
   constructor(
     @InjectRepository(Candidate)
     private readonly candidateRepository: Repository<Candidate>,

@@ -16,4 +16,11 @@ export class CreateCandidateDto {
     @MinLength(1)
     @MaxLength(50)
     experience : string;
+    
+
+    @IsInt()
+    UtilizadorUser_Id : number;
+
+    @IsInt()
+    Vacancyvacancy_id : number;
 }
