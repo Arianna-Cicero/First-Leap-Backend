@@ -1,26 +1,52 @@
 import { Injectable } from '@nestjs/common';
-import { CreateJobtypeDto } from './dto/create-jobtype.dto';
-import { UpdateJobtypeDto } from './dto/update-jobtype.dto';
+import { CreateJobTypeDto } from './dto/create-jobtype.dto';
+import { UpdateJobTypeDto } from './dto/update-jobtype.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { JobType } from './entities/jobtype.entity';
+import { EntityManager, Repository } from 'typeorm';
 
 @Injectable()
 export class JobtypeService {
-  create(createJobtypeDto: CreateJobtypeDto) {
-    return 'This action adds a new jobtype';
+  constructor(
+    @InjectRepository(JobType)
+    private readonly jobtypeRepository: Repository<JobType>,
+    private readonly entityManger: EntityManager,
+  ) {}
+  async create(createJobTypeDto: CreateJobTypeDto) {
+    const jobtype = new JobType(createJobTypeDto);
+    await this.entityManger.save(jobtype);
+    return 'jobtype adicionada';
   }
 
-  findAll() {
-    return `This action returns all jobtype`;
+  async findAll() {
+    return this.jobtypeRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} jobtype`;
+  async findOne(id: number) {
+    return this.jobtypeRepository.find({
+      where: {
+        type_id: id,
+      },
+    });
   }
 
-  update(id: number, updateJobtypeDto: UpdateJobtypeDto) {
-    return `This action updates a #${id} jobtype`;
+  async update(
+    id: number,
+    updateJobTypeDto: UpdateJobTypeDto,
+  ): Promise<JobType> {
+    await this.jobtypeRepository.update(id, updateJobTypeDto);
+    const updatedType = await this.jobtypeRepository.findOne({
+      where: { type_id: id },
+    });
+    this.jobtypeRepository.find;
+    if (!updatedType) {
+      throw new Error('Utilizador no encontrado');
+    }
+    return updatedType;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} jobtype`;
+  async remove(id: number) {
+    await this.jobtypeRepository.delete(id);
+    return `jobtype de ID #${id} eliminado`;
   }
 }

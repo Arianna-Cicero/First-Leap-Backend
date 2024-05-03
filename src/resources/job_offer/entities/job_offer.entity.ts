@@ -1,9 +1,9 @@
 import { JobType } from 'src/resources/jobtype/entities/jobtype.entity';
-import { Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+@Entity()
 export class JobOffer {
   @PrimaryGeneratedColumn({ type: 'int' })
-  JO: number;
+  JO_id: number;
 
   @Column({ type: 'char', length: 50 })
   title: string;
@@ -23,6 +23,10 @@ export class JobOffer {
   @Column({ type: 'char', length: 15 })
   status: string;
 
-  @ManyToOne(() => JobType, (jobtype) => jobtype.joboffer)
-  jobtype: JobType;
+  @ManyToOne(() => JobType, (jobType) => jobType.jobOffers)
+  jobType: JobType;
+
+  constructor(joboffer: Partial<JobOffer>) {
+    Object.assign(this, joboffer);
+  }
 }

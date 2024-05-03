@@ -1,19 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePostalCodeDto } from './dto/create-postal_code.dto';
 import { UpdatePostalCodeDto } from './dto/update-postal_code.dto';
+import { EntityManager, Repository } from 'typeorm';
+import { PostalCode } from './entities/postal_code.entity';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class PostalCodeService {
-  create(createPostalCodeDto: CreatePostalCodeDto) {
+  constructor(
+    @InjectRepository(PostalCode)
+    private readonly postalcodeRepository: Repository<PostalCode>,
+    private readonly entityManager: EntityManager,
+  ) {}
+  async create(createPostalCodeDto: CreatePostalCodeDto) {
+    const postalcode = new PostalCode(createPostalCodeDto);
+    await this.entityManager.save(postalcode);
     return 'This action adds a new postalCode';
   }
 
-  findAll() {
-    return `This action returns all postalCode`;
+  async findAll() {
+    return this.postalcodeRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} postalCode`;
+  async findOne(id: number) {
+    return 'this.postalcodeRepository.findOneBy({ id })';
   }
 
   update(id: number, updatePostalCodeDto: UpdatePostalCodeDto) {
