@@ -28,8 +28,19 @@ export class CandidateService {
     });
   }
 
-  async update(id: number, updateCandidateDto: UpdateCandidateDto) {
-    return `This action updates a #${id} candidate`;
+  async update(
+    id: number,
+    updateCandidateDto: UpdateCandidateDto,
+  ): Promise<Candidate> {
+    await this.candidateRepository.update(id, updateCandidateDto);
+    this.candidateRepository.find;
+    const updatedCandidate = await this.candidateRepository.findOne({
+      where: { candidate_id: id },
+    });
+    if (!updatedCandidate) {
+      throw new Error('candidato no encontrado');
+    }
+    return updatedCandidate;
   }
 
   async remove(id: number) {

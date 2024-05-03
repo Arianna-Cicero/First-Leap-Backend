@@ -23,7 +23,7 @@ export class JobOfferService {
   }
 
   async findOne(id: number) {
-    return this.jobofferRepository.find({
+    return this.jobofferRepository.findOne({
       where: {
         JO_id: id,
       },
@@ -31,9 +31,15 @@ export class JobOfferService {
   }
 
   async update(id: number, updateJobOfferDto: UpdateJobOfferDto) {
-    const update = new JobOffer(updateJobOfferDto);
-    await this.jobofferRepository.save(update);
-    return `Oferta de ID #${id} modificada`;
+    await this.jobofferRepository.update(id, updateJobOfferDto);
+    const updatedJobOffer = await this.jobofferRepository.findOne({
+      where: { JO_id: id },
+    });
+    await this.jobofferRepository.find;
+    if (!updatedJobOffer) {
+      throw new Error('Job offer nao econtrada');
+    }
+    return updatedJobOffer;
   }
 
   async remove(id: number) {

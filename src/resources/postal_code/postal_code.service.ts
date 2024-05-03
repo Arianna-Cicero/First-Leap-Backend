@@ -15,7 +15,7 @@ export class PostalCodeService {
   async create(createPostalCodeDto: CreatePostalCodeDto) {
     const postalcode = new PostalCode(createPostalCodeDto);
     await this.entityManager.save(postalcode);
-    return 'This action adds a new postalCode';
+    return 'Novo postal code adicionado';
   }
 
   async findAll() {
@@ -23,14 +23,22 @@ export class PostalCodeService {
   }
 
   async findOne(id: number) {
-    return 'this.postalcodeRepository.findOneBy({ id })';
+    return this.postalcodeRepository.findOne({ where: { pc: id } });
   }
 
-  update(id: number, updatePostalCodeDto: UpdatePostalCodeDto) {
-    return `This action updates a #${id} postalCode`;
+  async update(id: number, updatePostalCodeDto: UpdatePostalCodeDto) {
+    await this.postalcodeRepository.update(id, updatePostalCodeDto);
+    const updatedPostalCode = await this.postalcodeRepository.findOne({
+      where: { pc: id },
+    });
+    this.postalcodeRepository.find();
+    if (!updatedPostalCode) {
+      throw new Error('Postal Code nao encontrado');
+    }
+    return updatedPostalCode;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} postalCode`;
+  async remove(id: number) {
+    return this.postalcodeRepository.delete(id);
   }
 }

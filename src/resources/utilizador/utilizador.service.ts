@@ -47,7 +47,7 @@ export class UtilizadorService {
     });
     this.userRepository.find;
     if (!updatedUser) {
-      throw new Error('User not found');
+      throw new Error('utilizador no encontrado');
     }
     return updatedUser;
   }

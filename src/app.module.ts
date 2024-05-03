@@ -17,6 +17,8 @@ import { AdminModule } from './resources/admin/admin.module';
 import { CandidateCandidacyModule } from './resources/candidate_candidacy/candidate_candidacy.module';
 import { RecruiterModule } from './resources/recruiter/recruiter.module';
 import { AuthModule } from './auth/auth.module';
+import { AddressModule } from './resources/address/address.module';
+import { CompanyModule } from './resources/company/company.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -31,6 +33,8 @@ import { AuthModule } from './auth/auth.module';
     // RecruiterModule,
     CandidateCandidacyModule,
     AuthModule,
+    AddressModule,
+    CompanyModule,
   ],
   controllers: [AppController, HealthController],
   providers: [

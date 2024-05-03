@@ -23,7 +23,7 @@ export class JobtypeService {
   }
 
   async findOne(id: number) {
-    return this.jobtypeRepository.find({
+    return this.jobtypeRepository.findOne({
       where: {
         type_id: id,
       },

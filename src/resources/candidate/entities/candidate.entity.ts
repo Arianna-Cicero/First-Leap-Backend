@@ -1,4 +1,4 @@
-import { Candidate_Candidacy } from 'src/resources/candidate_candidacy/entities/candidate_candidacy.entity';
+// import { Candidate_Candidacy } from 'src/resources/candidate_candidacy/entities/candidate_candidacy.entity';
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
 import { Vacancy } from 'src/resources/vacancy/entities/vacancy.entity';
 import {
