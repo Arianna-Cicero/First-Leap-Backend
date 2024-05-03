@@ -16,30 +16,30 @@ export class RecruiterController {
   constructor(private readonly recruiterService: RecruiterService) {}
 
   @Post()
-  create(@Body() createRecruiterDto: CreateRecruiterDto) {
+  async create(@Body() createRecruiterDto: CreateRecruiterDto) {
     return this.recruiterService.create(createRecruiterDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.recruiterService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.recruiterService.findOne(+id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateRecruiterDto: UpdateRecruiterDto,
   ) {
     return this.recruiterService.update(+id, updateRecruiterDto);
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.recruiterService.remove(+id);
-  // }
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.recruiterService.remove(+id);
+  }
 }

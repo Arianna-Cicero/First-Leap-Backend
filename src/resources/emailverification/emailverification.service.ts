@@ -34,9 +34,16 @@ export class EmailverificationService {
     id: number,
     updateEmailverificationDto: UpdateEmailverificationDto,
   ) {
-    const update = new Emailverification(updateEmailverificationDto);
-    await this.emailRepository.save(update);
-    return `emailverification de ID#${id} modificado`;
+    await this.emailRepository.update(id, updateEmailverificationDto);
+    const updatedEmail = await this.emailRepository.findOne({
+      where: { email_ver_id: id },
+    });
+    await this.emailRepository.find;
+    if (!updatedEmail) {
+      throw new Error('Email nao foi encontrado');
+    }
+
+    return updatedEmail;
   }
 
   async remove(id: number) {

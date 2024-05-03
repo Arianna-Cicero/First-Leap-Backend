@@ -31,7 +31,7 @@ export class PostalCodeController {
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updatePostalCodeDto: UpdatePostalCodeDto,
   ) {
@@ -39,7 +39,7 @@ export class PostalCodeController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  async remove(@Param('id') id: string) {
     return this.postalCodeService.remove(+id);
   }
 }
