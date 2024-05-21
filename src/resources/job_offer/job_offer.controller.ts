@@ -38,8 +38,8 @@ export class JobOfferController {
     return this.jobOfferService.update(+id, updateJobOfferDto);
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.jobOfferService.remove(+id);
-  }
+  // @Delete(':id')
+  // async remove(@Param('id') id: string) {
+  //   return this.jobOfferService.remove(+id);
+  // }
 }

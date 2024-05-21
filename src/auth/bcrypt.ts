@@ -1,6 +1,6 @@
 import * as bcrypt from 'bcrypt';
 
-export function encodePassword(rawPassword: string) {
+export async function encodePassword(rawPassword: string) {
   const SALT_ROUNDS = 10;
   return bcrypt.hashSync(rawPassword, SALT_ROUNDS);
 }

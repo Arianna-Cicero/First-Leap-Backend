@@ -26,6 +26,9 @@ export class SelectionProcess {
   @Column({ type: 'char', length: 250 })
   phase: string;
 
+  @Column({ type: 'date' })
+  starting_date: Date;
+
   // @ManyToOne(() =>  Recruiter,  recruiter =>  recruiter.selectionProcess)
   //   recruiter:  Recruiter;
   @ManyToOne(() => Vacancy, (vacancy) => vacancy.selectionProcess)
@@ -39,6 +42,4 @@ export class SelectionProcess {
   constructor(selection_process: Partial<SelectionProcess>) {
     Object.assign(this, selection_process);
   }
-
-  selectionPhase: CreateSelectionphaseDto;
 }

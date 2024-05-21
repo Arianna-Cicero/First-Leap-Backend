@@ -15,10 +15,10 @@ import { UpdateUtilizadorDto } from './dto/update-utilizador.dto';
 export class UtilizadorController {
   constructor(private readonly utilizadorService: UtilizadorService) {}
 
-  @Post()
-  async create(@Body() createUtilizadorDto: CreateUtilizadorDto) {
-    return this.utilizadorService.create(createUtilizadorDto);
-  }
+  // @Post()
+  // async create(@Body() createUtilizadorDto: CreateUtilizadorDto) {
+  //   return this.utilizadorService.create(createUtilizadorDto);
+  // }
 
   @Get()
   async findAll() {

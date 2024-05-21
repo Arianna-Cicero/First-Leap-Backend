@@ -12,8 +12,8 @@ export class Recruiter {
   @Column({ type: 'char', length: 50 })
   position: string;
 
-  //   @ManyToOne(() => Utilizador, (utilizador) => utilizador.recruiter)
-  //   utilizador: Utilizador[];
+  @ManyToOne(() => Utilizador, (utilizador) => utilizador.recruiter)
+  utilizador: Utilizador[];
 
   constructor(recruiter: Partial<Recruiter>) {
     Object.assign(this, recruiter);

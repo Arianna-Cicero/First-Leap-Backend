@@ -19,6 +19,7 @@ import { RecruiterModule } from './resources/recruiter/recruiter.module';
 import { AuthModule } from './auth/auth.module';
 import { AddressModule } from './resources/address/address.module';
 import { CompanyModule } from './resources/company/company.module';
+import { CandidacyModule } from './resources/candidacy/candidacy.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -30,8 +31,9 @@ import { CompanyModule } from './resources/company/company.module';
     UtilizadorModule,
     CandidateModule,
     AdminModule,
-    // RecruiterModule,
+    RecruiterModule,
     CandidateCandidacyModule,
+    CandidacyModule,
     AuthModule,
     AddressModule,
     CompanyModule,

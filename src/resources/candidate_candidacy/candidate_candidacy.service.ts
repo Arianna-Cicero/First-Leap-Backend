@@ -20,7 +20,7 @@ export class CandidateCandidacyService {
     return `This action updates a #${id} candidateCandidacy`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} candidateCandidacy`;
-  }
+  // remove(id: number) {
+  //   return `This action removes a #${id} candidateCandidacy`;
+  // }
 }

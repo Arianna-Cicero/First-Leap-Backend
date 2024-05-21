@@ -15,22 +15,22 @@ export class Utilizador {
   @PrimaryGeneratedColumn({ type: 'int' })
   User_id: number;
 
-  @Column({ type: 'char', length: 50, nullable: false })
+  @Column({ type: 'char', length: 50 })
   name: string;
 
-  @Column({ type: 'char', length: 50, nullable: false })
+  @Column({ type: 'char', length: 50 })
   username: string;
 
-  @Column({ type: 'char', length: 50, nullable: false })
+  @Column({ type: 'char', length: 50 })
   password: string;
 
-  @Column({ type: 'int', nullable: false })
+  @Column({ type: 'int' })
   number: number;
 
-  @Column({ type: 'char', length: 50, nullable: false })
+  @Column({ type: 'char', length: 50 })
   email: string;
 
-  @Column({ type: 'date', nullable: false })
+  @Column({ type: 'date' })
   birth_date: Date;
 
   @OneToMany(() => Candidate, (candidate) => candidate.utilizador)
@@ -39,8 +39,8 @@ export class Utilizador {
   @OneToMany(() => Admin, (admin) => admin.utilizador)
   admin: Admin[];
 
-  // @OneToMany(() => Recruiter, (recruiter) => recruiter.utilizador)
-  // recruiter: Recruiter[];
+  @OneToMany(() => Recruiter, (recruiter) => recruiter.utilizador)
+  recruiter: Recruiter[];
 
   @ManyToOne(
     () => Emailverification,

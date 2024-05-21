@@ -23,6 +23,9 @@ export class JobOffer {
   @Column({ type: 'char', length: 15 })
   status: string;
 
+  @Column({ type: 'date' })
+  deadline: Date;
+
   @ManyToOne(() => JobType, (jobType) => jobType.jobOffers)
   jobType: JobType;
 

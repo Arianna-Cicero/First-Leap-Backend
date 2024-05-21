@@ -4,7 +4,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Admin {
   @PrimaryGeneratedColumn({ type: 'int' })
-  admin: number;
+  admin_id: number;
 
   @Column({ type: 'char', length: 50 })
   position: string;
@@ -12,7 +12,8 @@ export class Admin {
   @ManyToOne(() => Utilizador, (utilizador) => utilizador.admin)
   utilizador: Utilizador;
 
-  constructor(admin: Partial<Admin>) {
-    Object.assign(this, admin);
-  }
+  // constructor(admin: Partial<Admin>, utilizador: Partial<Utilizador>) {
+  //   super(utilizador);
+  //   Object.assign(this, admin);
+  // }
 }

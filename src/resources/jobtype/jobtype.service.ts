@@ -45,8 +45,8 @@ export class JobtypeService {
     return updatedType;
   }
 
-  async remove(id: number) {
-    await this.jobtypeRepository.delete(id);
-    return `jobtype de ID #${id} eliminado`;
-  }
+  // async remove(id: number) {
+  //   await this.jobtypeRepository.delete(id);
+  //   return `jobtype de ID #${id} eliminado`;
+  // }
 }
