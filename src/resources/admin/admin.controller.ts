@@ -15,10 +15,10 @@ import { UpdateAdminDto } from './dto/update-admin.dto';
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  @Post()
-  async create(@Body() createAdminDto: CreateAdminDto) {
-    return this.adminService.create(createAdminDto);
-  }
+  // @Post()
+  // async create(@Body() createAdminDto: CreateAdminDto) {
+  //   return this.adminService.create(createAdminDto);
+  // }
 
   @Get()
   async findAll() {
@@ -30,13 +30,13 @@ export class AdminController {
     return this.adminService.findOne(+id);
   }
 
-  @Patch(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateAdminDto: UpdateAdminDto,
-  ) {
-    return this.adminService.update(+id, updateAdminDto);
-  }
+  // @Patch(':id')
+  // async update(
+  //   @Param('id') id: string,
+  //   @Body() updateAdminDto: UpdateAdminDto,
+  // ) {
+  //   return this.adminService.update(+id, updateAdminDto);
+  // }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {

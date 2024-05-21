@@ -15,11 +15,11 @@ export class JobOfferService {
   async create(createJobOfferDto: CreateJobOfferDto) {
     const joboffer = new JobOffer(createJobOfferDto);
     await this.entityManger.save(joboffer);
-    return 'Oferta de trabalho criada!!!';
+    return 'Oferta de trabalho criada!';
   }
 
   async findAll() {
-    return this.jobofferRepository.find() ? 'si' : 'no';
+    return this.jobofferRepository.find();
   }
 
   async findOne(id: number) {
@@ -28,6 +28,18 @@ export class JobOfferService {
         JO_id: id,
       },
     });
+  }
+
+  async findDeadlineById(joId: number): Promise<Date | null> {
+    const jobOffer = await this.jobofferRepository.findOne({
+      where: { JO_id: joId },
+      select: ['deadline'],
+    });
+    if (jobOffer) {
+      return jobOffer.deadline;
+    } else {
+      return null;
+    }
   }
 
   async update(id: number, updateJobOfferDto: UpdateJobOfferDto) {

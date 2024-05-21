@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CandidacyService } from './candidacy.service';
 import { CreateCandidacyDto } from './dto/create-candidacy.dto';
 import { UpdateCandidacyDto } from './dto/update-candidacy.dto';
@@ -11,7 +19,6 @@ export class CandidacyController {
   create(@Body() createCandidacyDto: CreateCandidacyDto) {
     return this.candidacyService.create(createCandidacyDto);
   }
-  
 
   @Get()
   findAll() {
@@ -24,12 +31,15 @@ export class CandidacyController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCandidacyDto: UpdateCandidacyDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCandidacyDto: UpdateCandidacyDto,
+  ) {
     return this.candidacyService.update(+id, updateCandidacyDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.candidacyService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.candidacyService.remove(+id);
+  // }
 }

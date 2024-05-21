@@ -6,9 +6,9 @@ export class Candidate_Candidacy {
   @PrimaryGeneratedColumn({ type: 'int' })
   candidate_candidacy_id: number;
 
-  //   @ManyToOne(() => Candidacy, (candidacy) => candidacy.candidate_candidacy)
-  //   candidacy: Candidacy;
+  @ManyToOne(() => Candidacy, (candidacy) => candidacy.candidate_candidacy)
+  candidacy: Candidacy;
 
-  // @ManyToOne(() => Candidate, (candidate) => candidate.candidate_candidacy)
-  // candidate: Candidate;
+  @ManyToOne(() => Candidate, (candidate) => candidate.candidate_candidacy)
+  candidate: Candidate;
 }

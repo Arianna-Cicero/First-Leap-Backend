@@ -15,10 +15,10 @@ import { UpdateCandidateDto } from './dto/update-candidate.dto';
 export class CandidateController {
   constructor(private readonly candidateService: CandidateService) {}
 
-  @Post()
-  async create(@Body() createCandidateDto: CreateCandidateDto) {
-    return this.candidateService.create(createCandidateDto);
-  }
+  // @Post()
+  // async create(@Body() createCandidateDto: CreateCandidateDto) {
+  //   return this.candidateService.create(createCandidateDto);
+  // }
 
   @Get()
   async findAll() {
@@ -30,16 +30,16 @@ export class CandidateController {
     return this.candidateService.findOne(+id);
   }
 
-  @Patch(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateCandidateDto: UpdateCandidateDto,
-  ) {
-    return this.candidateService.update(+id, updateCandidateDto);
-  }
+  // @Patch(':id')
+  // async update(
+  //   @Param('id') id: string,
+  //   @Body() updateCandidateDto: UpdateCandidateDto,
+  // ) {
+  //   return this.candidateService.update(+id, updateCandidateDto);
+  // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.candidateService.remove(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.candidateService.remove(+id);
+  // }
 }
