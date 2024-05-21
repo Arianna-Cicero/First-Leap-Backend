@@ -2,15 +2,15 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 import { CreateVacancyDto } from './dto/create-vacancy.dto';
 import { UpdateVacancyDto } from './dto/update-vacancy.dto';
 
-
 @Injectable()
 export class VacancyService {
   create(createVacancyDto: CreateVacancyDto) {
-    
     const { title, description, Job_OfferJO_id } = createVacancyDto;
 
     if (!title || !description || !Job_OfferJO_id) {
-      throw new BadRequestException('Title, description, and job offer are required.');
+      throw new BadRequestException(
+        'Title, description, and job offer are required.',
+      );
     }
 
     return 'This action adds a new vacancy';

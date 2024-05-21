@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateJobTypeDto } from './dto/create-jobtype.dto';
-import { UpdateJobTypeDto } from './dto/update-jobtype.dto';
+import { CreateJobTypeDto } from './dto/create-job_type.dto';
+import { UpdateJobTypeDto } from './dto/update-job_type.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { JobType } from './entities/jobtype.entity';
+import { JobType } from './entities/job_type.entity';
 import { EntityManager, Repository } from 'typeorm';
 
 @Injectable()

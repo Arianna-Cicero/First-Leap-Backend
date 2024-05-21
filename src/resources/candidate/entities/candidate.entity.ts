@@ -1,10 +1,10 @@
+import { Candidacy } from 'src/resources/candidacy/entities/candidacy.entity';
 // import { Candidate_Candidacy } from 'src/resources/candidate_candidacy/entities/candidate_candidacy.entity';
-import { Candidate_Candidacy } from 'src/resources/candidate_candidacy/entities/candidate_candidacy.entity';
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
-// import { Vacancy } from 'src/resources/vacancy/entities/vacancy.entity';
 import {
   Column,
   Entity,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -12,9 +12,6 @@ import {
 
 @Entity()
 export class Candidate extends Utilizador {
-  @PrimaryGeneratedColumn({ type: 'int' })
-  candidate_id: number;
-
   @Column({ type: 'blob' })
   cv: Buffer;
 
@@ -24,17 +21,16 @@ export class Candidate extends Utilizador {
   @Column({ type: 'char', length: 50 })
   experience: string;
 
-  @ManyToOne(() => Utilizador, (utilizador) => utilizador.User_id)
-  utilizador: Utilizador;
+  // @ManyToOne(() => Utilizador, (utilizador) => utilizador.candidate)
+  // utilizador: Utilizador;
 
-  @OneToMany(
-    () => Candidate_Candidacy,
-    (candidate_candidacy) => candidate_candidacy.candidate,
-  )
-  candidate_candidacy: Candidate_Candidacy[];
-
-  // @ManyToOne(() => Vacancy, (vacancy) => vacancy.candidate)
-  // vacancy: Vacancy;
+  // @OneToMany(
+  //   () => Candidate_Candidacy,
+  //   (candidate_candidacy) => candidate_candidacy.candidate,
+  // )
+  // candidate_candidacy: Candidate_Candidacy[];
+  @ManyToMany(() => Candidacy)
+  candidacies: Candidacy[];
 
   constructor(candidate: Partial<Candidate>, utilizador: Partial<Utilizador>) {
     super(utilizador);

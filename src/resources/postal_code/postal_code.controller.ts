@@ -38,8 +38,8 @@ export class PostalCodeController {
     return this.postalCodeService.update(+id, updatePostalCodeDto);
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.postalCodeService.remove(+id);
-  }
+  // @Delete(':id')
+  // async remove(@Param('id') id: string) {
+  //   return this.postalCodeService.remove(+id);
+  // }
 }

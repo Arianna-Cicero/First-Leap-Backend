@@ -38,7 +38,7 @@ export class CompanyService {
     return updatedCompany;
   }
 
-  async remove(id: number) {
-    return this.companyRepository.delete(id);
-  }
+  // async remove(id: number) {
+  //   return this.companyRepository.delete(id);
+  // }
 }

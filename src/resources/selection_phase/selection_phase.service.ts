@@ -9,12 +9,9 @@ import { SelectionProcessService } from 'src/resources/selection_process/selecti
 
 @Injectable()
 export class SelectionPhaseService {
-  constructor(
-    @InjectRepository(SelectionProcess)
-    private readonly selectionProcessRepository: Repository<SelectionProcess>,
-    private readonly candidateService: CandidateService,
-    private readonly selectionProcessService: SelectionProcessService,
-  ) {}
+  constructor() // private readonly candidateService: CandidateService, // private readonly selectionProcessRepository: Repository<SelectionProcess>, // @InjectRepository(SelectionProcess)
+  // private readonly selectionProcessService: SelectionProcessService,
+  {}
 
   // async processSelectionPhase(createSelectionphaseDto: CreateSelectionphaseDto) {
   //     // Retrieve the selection process ID from the DTO
@@ -62,7 +59,7 @@ export class SelectionPhaseService {
     return `This action updates a #${id} recruiter`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} recruiter`;
-  }
+  // remove(id: number) {
+  //   return `This action removes a #${id} recruiter`;
+  // }
 }

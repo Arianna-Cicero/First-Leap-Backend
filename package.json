@@ -50,7 +50,7 @@
     "pdf-parse": "^1.1.1",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-    "textract": "^2.5.0",
+    "textract": "^0.20.0",
     "typeorm": "^0.3.20",
     "xmldom": "^0.6.0"
   },

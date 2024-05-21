@@ -1,4 +1,4 @@
-import { JobType } from 'src/resources/jobtype/entities/jobtype.entity';
+import { JobType } from 'src/resources/jobtype/entities/job_type.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class JobOffer {
