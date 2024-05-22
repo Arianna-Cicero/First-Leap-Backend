@@ -28,7 +28,7 @@ import { ResultModule } from './resources/result/result.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    DatabaseModule,
+    DatabaseModule, //
     EmailverificationModule,
     PostalCodeModule,
     JobOfferModule,
@@ -39,10 +39,9 @@ import { ResultModule } from './resources/result/result.module';
     RecruiterModule,
     CandidateCandidacyModule,
     CandidacyModule,
-    AuthModule,
+    AuthModule, //
     AddressModule,
     CompanyModule,
-    AuthModule,
     SelectionProcessModule,
     SelectionPhaseModule,
     FeedbackModule,
