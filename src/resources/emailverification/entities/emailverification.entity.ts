@@ -1,7 +1,7 @@
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('emailverification')
 export class Emailverification {
   @PrimaryGeneratedColumn({ type: 'int' })
   email_ver_id: number;

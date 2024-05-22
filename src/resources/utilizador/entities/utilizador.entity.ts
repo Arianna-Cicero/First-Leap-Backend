@@ -1,7 +1,7 @@
-import { Admin } from 'src/resources/admin/entities/admin.entity';
-import { Candidate } from 'src/resources/candidate/entities/candidate.entity';
+// import { Admin } from 'src/resources/admin/entities/admin.entity';
+import { Address } from 'src/resources/address/entities/address.entity';
 import { Emailverification } from 'src/resources/emailverification/entities/emailverification.entity';
-import { Recruiter } from 'src/resources/recruiter/entities/recruiter.entity';
+// import { Recruiter } from 'src/resources/recruiter/entities/recruiter.entity';
 import {
   Column,
   Entity,
@@ -10,7 +10,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity('utilizador')
 export class Utilizador {
   @PrimaryGeneratedColumn({ type: 'int' })
   User_id: number;
@@ -33,18 +33,21 @@ export class Utilizador {
   @Column({ type: 'date' })
   birth_date: Date;
 
-  @OneToMany(() => Candidate, (candidate) => candidate.utilizador)
-  candidate: Candidate[];
+  // @OneToMany(() => Candidate, (candidate) => candidate.utilizador)
+  // candidate: Candidate[];
 
-  @OneToMany(() => Admin, (admin) => admin.utilizador)
-  admin: Admin[];
+  // @OneToMany(() => Admin, (admin) => admin.utilizador)
+  // admin: Admin[];
 
-  @OneToMany(() => Recruiter, (recruiter) => recruiter.utilizador)
-  recruiter: Recruiter[];
+  // @OneToMany(() => Recruiter, (recruiter) => recruiter.utilizador)
+  // recruiter: Recruiter[];
+
+  @OneToMany(() => Address, (address) => address.utilizador)
+  address: Address[];
 
   @ManyToOne(
     () => Emailverification,
-    (emailverificaiton) => emailverificaiton.utilizador,
+    (emailverification) => emailverification.utilizador,
   )
   emailverification: Emailverification;
 

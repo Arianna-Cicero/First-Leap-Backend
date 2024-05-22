@@ -40,8 +40,8 @@ export class SelectionProcessController {
     return this.selectionProcessService.update(+id, updateSelectionProcessDto);
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.selectionProcessService.remove(+id);
-  }
+  // @Delete(':id')
+  // async remove(@Param('id') id: string) {
+  //   return this.selectionProcessService.remove(+id);
+  // }
 }

@@ -38,7 +38,7 @@ export class PostalCodeService {
     return updatedPostalCode;
   }
 
-  async remove(id: number) {
-    return this.postalcodeRepository.delete(id);
-  }
+  // async remove(id: number) {
+  //   return this.postalcodeRepository.delete(id);
+  // }
 }

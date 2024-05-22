@@ -54,7 +54,7 @@ export class JobOfferService {
     return updatedJobOffer;
   }
 
-  async remove(id: number) {
-    return this.jobofferRepository.delete(id);
-  }
+  // async remove(id: number) {
+  //   return this.jobofferRepository.delete(id);
+  // }
 }

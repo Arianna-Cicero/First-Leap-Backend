@@ -43,8 +43,8 @@ export class EmailverificationController {
     );
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.emailverificationService.remove(+id);
-  }
+  // @Delete(':id')
+  // async remove(@Param('id') id: string) {
+  //   return this.emailverificationService.remove(+id);
+  // }
 }

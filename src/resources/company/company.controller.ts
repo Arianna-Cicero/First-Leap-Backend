@@ -38,8 +38,8 @@ export class CompanyController {
     return this.companyService.update(+id, updateCompanyDto);
   }
 
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.companyService.remove(+id);
-  }
+  // @Delete(':id')
+  // async remove(@Param('id') id: string) {
+  //   return this.companyService.remove(+id);
+  // }
 }

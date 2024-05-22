@@ -1,10 +1,15 @@
-import { Column, Entity, OneToMany,ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { SelectionProcess } from 'src/resources/selection_process/entities/selection_process.entity'; 
+import {
+  Column,
+  Entity,
+  OneToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { SelectionProcess } from 'src/resources/selection_process/entities/selection_process.entity';
 import { Feedback } from 'src/resources/feedback/entities/feedback.entity';
-//import { Candidate } from './candidate.entity'; 
+//import { Candidate } from './candidate.entity';
 
-
-@Entity()
+@Entity('selection_phase')
 export class SelectionPhase {
   @PrimaryGeneratedColumn({ type: 'int' })
   SPH: number;
@@ -12,15 +17,22 @@ export class SelectionPhase {
   @Column({ type: 'char', length: 250 })
   description: string;
 
-  @Column({ type: 'int'})
+  @Column({ type: 'int' })
   order: number;
 
   @Column({ type: 'char', length: 250 })
   process: string;
 
-  @ManyToOne(() => SelectionProcess, selectionProcess => selectionProcess.selectionPhases)
-    selectionProcess: SelectionProcess;
+  @ManyToOne(
+    () => SelectionProcess,
+    (selectionProcess) => selectionProcess.selectionPhases,
+  )
+  selectionProcess: SelectionProcess;
 
-  @OneToMany(() => Feedback, feedback => feedback.SelectionPhase)
+  @OneToMany(() => Feedback, (feedback) => feedback.SelectionPhase)
   feedback: Feedback[];
+
+  constructor(selectionPhase: Partial<SelectionPhase>) {
+    Object.assign(this, selectionPhase);
+  }
 }

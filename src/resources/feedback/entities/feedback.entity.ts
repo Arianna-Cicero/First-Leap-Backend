@@ -1,7 +1,8 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { JobType } from 'src/resources/jobtype/entities/jobtype.entity';
-import { SelectionPhase } from 'src/resources/selection_phase/entities/selection_phase.entity'; 
+// import { JobType } from 'src/resources/jobtype/entities/jobtype.entity';
+import { SelectionPhase } from 'src/resources/selection_phase/entities/selection_phase.entity';
 
+@Entity()
 export class Feedback {
   @PrimaryGeneratedColumn({ type: 'int' })
   feedback_id: number;
@@ -9,8 +10,10 @@ export class Feedback {
   @Column({ type: 'char', length: 250 })
   feedback_desc: string;
 
-  @ManyToOne(() => SelectionPhase, selectionPhase => selectionPhase.feedback)
+  @ManyToOne(() => SelectionPhase, (selectionPhase) => selectionPhase.feedback)
   SelectionPhase: SelectionPhase;
+
+  constructor(feedback: Partial<Feedback>) {
+    Object.assign(this, feedback);
+  }
 }
-
-

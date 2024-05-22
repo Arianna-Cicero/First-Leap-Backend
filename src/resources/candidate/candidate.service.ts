@@ -5,6 +5,7 @@ import { Candidate } from './entities/candidate.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
 import { CreateUtilizadorDto } from '../utilizador/dto/create-utilizador.dto';
+import { Utilizador } from '../utilizador/entities/utilizador.entity';
 
 @Injectable()
 export class CandidateService {
@@ -13,11 +14,14 @@ export class CandidateService {
     private readonly candidateRepository: Repository<Candidate>,
     private readonly entityManager: EntityManager,
   ) {}
-  // async create(createCandidateDto: CreateCandidateDto, createUtilizadorDto: CreateUtilizadorDto) {
-  //   const candidate = new Candidate(createCandidateDto, createUtilizadorDto);
-  //   await this.candidateRepository.save(candidate);
-  //   return 'Candidato creado';
-  // }
+  async create(
+    createCandidateDto: CreateCandidateDto,
+    createUtilizadorDto: CreateUtilizadorDto,
+  ) {
+    const candidate = new Candidate(createCandidateDto, createUtilizadorDto);
+    await this.candidateRepository.save(candidate);
+    return 'Candidato creado';
+  }
 
   async findAll(): Promise<Candidate[]> {
     return await this.candidateRepository.find();
@@ -25,13 +29,13 @@ export class CandidateService {
 
   async findOne(id: number) {
     return await this.candidateRepository.findOne({
-      where: { candidate_id: id },
+      where: { User_id: id },
     });
   }
 
   async findCVById(candidateId: number): Promise<Buffer> {
     const candidate = await this.candidateRepository.findOne({
-      where: { candidate_id: candidateId },
+      where: { User_id: candidateId },
       select: ['cv'],
     });
     if (candidate && candidate.cv) {
@@ -41,20 +45,20 @@ export class CandidateService {
     }
   }
 
-  // async update(
-  //   id: number,
-  //   updateCandidateDto: UpdateCandidateDto,
-  // ): Promise<Candidate> {
-  //   await this.candidateRepository.update(id, updateCandidateDto);
-  //   this.candidateRepository.find;
-  //   const updatedCandidate = await this.candidateRepository.findOne({
-  //     where: { candidate_id: id },
-  //   });
-  //   if (!updatedCandidate) {
-  //     throw new Error('candidato no encontrado');
-  //   }
-  //   return updatedCandidate;
-  // }
+  async update(
+    id: number,
+    updateCandidateDto: UpdateCandidateDto,
+  ): Promise<Candidate> {
+    await this.candidateRepository.update(id, updateCandidateDto);
+    this.candidateRepository.find;
+    const updatedCandidate = await this.candidateRepository.findOne({
+      where: { User_id: id },
+    });
+    if (!updatedCandidate) {
+      throw new Error('candidato no encontrado');
+    }
+    return updatedCandidate;
+  }
 
   // async remove(id: number) {
   //   return await this.candidateRepository.delete(id);

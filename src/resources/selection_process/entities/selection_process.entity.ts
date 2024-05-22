@@ -4,15 +4,14 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  JoinColumn,
 } from 'typeorm';
 import { Recruiter } from 'src/resources/recruiter/entities/recruiter.entity';
-import { CreateSelectionprocessDto } from '../dto/create-selection_process.dto';
+// import { CreateSelectionprocessDto } from '../dto/create-selection_process.dto';
 import { Vacancy } from 'src/resources/vancancy/entities/vacancy.entity';
 import { SelectionPhase } from 'src/resources/selection_phase/entities/selection_phase.entity';
-import { CreateSelectionphaseDto } from 'src/resources/selection_phase/dto/create-selection_phase.dto';
+// import { CreateSelectionphaseDto } from 'src/resources/selection_phase/dto/create-selection_phase.dto';
 
-@Entity()
+@Entity('selection_process')
 export class SelectionProcess {
   @PrimaryGeneratedColumn({ type: 'int' })
   SP_id: number;
@@ -29,10 +28,12 @@ export class SelectionProcess {
   @Column({ type: 'date' })
   starting_date: Date;
 
-  // @ManyToOne(() =>  Recruiter,  recruiter =>  recruiter.selectionProcess)
-  //   recruiter:  Recruiter;
+  @ManyToOne(() => Recruiter, (recruiter) => recruiter.selectionProcess)
+  recruiter: Recruiter;
+
   @ManyToOne(() => Vacancy, (vacancy) => vacancy.selectionProcess)
   vacancy: Vacancy;
+
   @OneToMany(
     () => SelectionPhase,
     (selectionPhase) => selectionPhase.selectionProcess,

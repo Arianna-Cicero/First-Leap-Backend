@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { SelectionProcess } from 'src/resources/selection_process/entities/selection_process.entity';
 
-@Entity()
+@Entity('vacancy')
 export class Vacancy {
   @PrimaryGeneratedColumn({ type: 'int' })
   vacancy_id: number;

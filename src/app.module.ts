@@ -10,7 +10,7 @@ import { DatabaseService } from './services/database.service';
 import { HealthController } from './controllers/health.controller';
 import { PostalCodeModule } from './resources/postal_code/postal_code.module';
 import { JobOfferModule } from './resources/job_offer/job_offer.module';
-import { JobtypeModule } from './resources/jobtype/jobtype.module';
+import { Job_typeModule } from './resources/jobtype/job_type.module';
 import { UtilizadorModule } from './resources/utilizador/utilizador.module';
 import { CandidateModule } from './resources/candidate/candidate.module';
 import { AdminModule } from './resources/admin/admin.module';
@@ -20,6 +20,11 @@ import { AuthModule } from './auth/auth.module';
 import { AddressModule } from './resources/address/address.module';
 import { CompanyModule } from './resources/company/company.module';
 import { CandidacyModule } from './resources/candidacy/candidacy.module';
+import { SelectionProcessModule } from './resources/selection_process/selection_process.module';
+import { SelectionPhaseModule } from './resources/selection_phase/selection_phase.module';
+import { FeedbackModule } from './resources/feedback/feedback.module';
+import { VacancyModule } from './resources/vancancy/vacancy.module';
+import { ResultModule } from './resources/result/result.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -27,7 +32,7 @@ import { CandidacyModule } from './resources/candidacy/candidacy.module';
     EmailverificationModule,
     PostalCodeModule,
     JobOfferModule,
-    JobtypeModule,
+    Job_typeModule,
     UtilizadorModule,
     CandidateModule,
     AdminModule,
@@ -38,6 +43,11 @@ import { CandidacyModule } from './resources/candidacy/candidacy.module';
     AddressModule,
     CompanyModule,
     AuthModule,
+    SelectionProcessModule,
+    SelectionPhaseModule,
+    FeedbackModule,
+    VacancyModule,
+    ResultModule,
   ],
   controllers: [AppController, HealthController],
   providers: [
