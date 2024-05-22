@@ -5,6 +5,12 @@ import { CandidateService } from './candidate.service';
 describe('CandidateController', () => {
   let controller: CandidateController;
 
+  const mockCandidateService = {
+    createCandidate: jest.fn(dto => ({
+      
+    }))
+  }
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [CandidateController],

@@ -6,8 +6,5 @@ export class CreateCandidacyDto {
     @Min(1)
     Candidacy_id: number;
 
-    @IsInt()
-    Job_OfferJO_id: number;
-
     selectionProcess: CreateSelectionprocessDto;
 }
