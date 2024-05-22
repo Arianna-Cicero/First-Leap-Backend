@@ -1,7 +1,7 @@
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('admin')
 export class Admin extends Utilizador {
   @Column({ type: 'char', length: 50 })
   position: string;

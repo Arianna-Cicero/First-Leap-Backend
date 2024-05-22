@@ -1,4 +1,5 @@
 // import { Admin } from 'src/resources/admin/entities/admin.entity';
+import { Address } from 'src/resources/address/entities/address.entity';
 import { Emailverification } from 'src/resources/emailverification/entities/emailverification.entity';
 // import { Recruiter } from 'src/resources/recruiter/entities/recruiter.entity';
 import {
@@ -9,7 +10,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity('utilizador')
 export class Utilizador {
   @PrimaryGeneratedColumn({ type: 'int' })
   User_id: number;
@@ -40,6 +41,9 @@ export class Utilizador {
 
   // @OneToMany(() => Recruiter, (recruiter) => recruiter.utilizador)
   // recruiter: Recruiter[];
+
+  @OneToMany(() => Address, (address) => address.utilizador)
+  address: Address[];
 
   @ManyToOne(
     () => Emailverification,

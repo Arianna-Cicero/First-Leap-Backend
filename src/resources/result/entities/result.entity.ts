@@ -1,7 +1,7 @@
 import { Candidacy } from 'src/resources/candidacy/entities/candidacy.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('result')
 export class Result {
   @PrimaryGeneratedColumn({ type: 'int' })
   result_id: number;
@@ -15,6 +15,10 @@ export class Result {
   @Column({ type: 'timestamp' })
   evaluation_date: Date;
 
-  // @OneToMany(() => Candidacy, (candidacy) => candidacy.result)
-  // candidacy: Candidacy[]
+  @ManyToOne(() => Candidacy, (candidacy) => candidacy.result)
+  candidacy: Candidacy;
+
+  constructor(result: Partial<Result>) {
+    Object.assign(this, result);
+  }
 }

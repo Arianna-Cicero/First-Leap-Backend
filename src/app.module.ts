@@ -14,7 +14,7 @@ import { Job_typeModule } from './resources/jobtype/job_type.module';
 import { UtilizadorModule } from './resources/utilizador/utilizador.module';
 import { CandidateModule } from './resources/candidate/candidate.module';
 import { AdminModule } from './resources/admin/admin.module';
-// import { CandidateCandidacyModule } from './resources/candidate_candidacy/candidate_candidacy.module';
+import { CandidateCandidacyModule } from './resources/candidate_candidacy/candidate_candidacy.module';
 import { RecruiterModule } from './resources/recruiter/recruiter.module';
 import { AuthModule } from './auth/auth.module';
 import { AddressModule } from './resources/address/address.module';
@@ -24,6 +24,7 @@ import { SelectionProcessModule } from './resources/selection_process/selection_
 import { SelectionPhaseModule } from './resources/selection_phase/selection_phase.module';
 import { FeedbackModule } from './resources/feedback/feedback.module';
 import { VacancyModule } from './resources/vancancy/vacancy.module';
+import { ResultModule } from './resources/result/result.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -36,7 +37,7 @@ import { VacancyModule } from './resources/vancancy/vacancy.module';
     CandidateModule,
     AdminModule,
     RecruiterModule,
-    // CandidateCandidacyModule,
+    CandidateCandidacyModule,
     CandidacyModule,
     AuthModule,
     AddressModule,
@@ -46,6 +47,7 @@ import { VacancyModule } from './resources/vancancy/vacancy.module';
     SelectionPhaseModule,
     FeedbackModule,
     VacancyModule,
+    ResultModule,
   ],
   controllers: [AppController, HealthController],
   providers: [

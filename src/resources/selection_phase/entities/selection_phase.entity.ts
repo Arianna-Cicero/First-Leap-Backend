@@ -9,7 +9,7 @@ import { SelectionProcess } from 'src/resources/selection_process/entities/selec
 import { Feedback } from 'src/resources/feedback/entities/feedback.entity';
 //import { Candidate } from './candidate.entity';
 
-@Entity()
+@Entity('selection_phase')
 export class SelectionPhase {
   @PrimaryGeneratedColumn({ type: 'int' })
   SPH: number;

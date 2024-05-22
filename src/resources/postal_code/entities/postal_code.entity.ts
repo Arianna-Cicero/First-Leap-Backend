@@ -1,14 +1,18 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Address } from 'src/resources/address/entities/address.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('postal_code')
 export class PostalCode {
-    @PrimaryGeneratedColumn({ type: 'int' })
-    pc : number;
+  @PrimaryGeneratedColumn({ type: 'int' })
+  pc: number;
 
-    @Column({ type: 'char', length: 50 })
-    localidade : string;
+  @Column({ type: 'char', length: 50 })
+  localidade: string;
 
-    constructor (postal_code: Partial<PostalCode>) {
-        Object.assign(this, postal_code)
-    }
+  @OneToMany(() => Address, (address) => address.postalcode)
+  address: Address[];
+
+  constructor(postal_code: Partial<PostalCode>) {
+    Object.assign(this, postal_code);
+  }
 }

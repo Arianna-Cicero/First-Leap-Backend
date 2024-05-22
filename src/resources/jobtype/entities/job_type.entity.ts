@@ -1,7 +1,7 @@
 import { JobOffer } from 'src/resources/job_offer/entities/job_offer.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('job_type')
 export class JobType {
   @PrimaryGeneratedColumn({ type: 'int' })
   type_id: number;

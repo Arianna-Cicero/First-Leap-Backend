@@ -3,7 +3,7 @@ import { SelectionProcess } from 'src/resources/selection_process/entities/selec
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('recruiter')
 export class Recruiter extends Utilizador {
   @Column({ type: 'char', length: 50 })
   name: string;

@@ -11,7 +11,7 @@ import { Vacancy } from 'src/resources/vancancy/entities/vacancy.entity';
 import { SelectionPhase } from 'src/resources/selection_phase/entities/selection_phase.entity';
 // import { CreateSelectionphaseDto } from 'src/resources/selection_phase/dto/create-selection_phase.dto';
 
-@Entity()
+@Entity('selection_process')
 export class SelectionProcess {
   @PrimaryGeneratedColumn({ type: 'int' })
   SP_id: number;
