@@ -32,7 +32,7 @@ export class CandidacyService {
     return `This action updates a #${id} candidacy`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} candidacy`;
-  }
+  // remove(id: number) {
+  //   return `This action removes a #${id} candidacy`;
+  // }
 }

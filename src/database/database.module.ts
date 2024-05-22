@@ -17,6 +17,7 @@ import { DatabaseService } from 'src/services/database.service';
         autoLoadEntities: true,
         synchronize: configService.getOrThrow('MYSQL_SYNCHRONIZE'),
         entities: [],
+        logging: true,
       }),
       inject: [ConfigService],
     }),

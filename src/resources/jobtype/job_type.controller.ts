@@ -7,9 +7,9 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { JobtypeService } from './jobtype.service';
-import { CreateJobTypeDto } from './dto/create-jobtype.dto';
-import { UpdateJobTypeDto } from './dto/update-jobtype.dto';
+import { JobtypeService } from './job_type.service';
+import { CreateJobTypeDto } from './dto/create-job_type.dto';
+import { UpdateJobTypeDto } from './dto/update-job_type.dto';
 
 @Controller('jobtype')
 export class JobtypeController {

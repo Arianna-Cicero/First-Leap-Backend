@@ -46,8 +46,8 @@ export class EmailverificationService {
     return updatedEmail;
   }
 
-  async remove(id: number) {
-    await this.emailRepository.delete(id);
-    return `emailverification de ID #${id} eliminado`;
-  }
+  // async remove(id: number) {
+  //   await this.emailRepository.delete(id);
+  //   return `emailverification de ID #${id} eliminado`;
+  // }
 }

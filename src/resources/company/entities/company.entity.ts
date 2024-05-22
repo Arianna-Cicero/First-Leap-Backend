@@ -1,17 +1,21 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Address } from 'src/resources/address/entities/address.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity('company')
 export class Company {
-    @PrimaryGeneratedColumn({ type: 'int' })
-    company_id : number;
+  @PrimaryGeneratedColumn({ type: 'int' })
+  company_id: number;
 
-    @Column({ type: 'char', length: 32 })
-    name: string;
+  @Column({ type: 'char', length: 32 })
+  name: string;
 
-    @Column({ type: 'char', length: 50 })
-    number: string;
+  @Column({ type: 'char', length: 50 })
+  number: string;
 
-    constructor (company: Partial<Company>) {
-        Object.assign(this, company)
-    }
+  @OneToMany(() => Address, (address) => address.company)
+  address: Address[];
+
+  constructor(company: Partial<Company>) {
+    Object.assign(this, company);
+  }
 }

@@ -10,15 +10,22 @@ import {
 import { CandidateService } from './candidate.service';
 import { CreateCandidateDto } from './dto/create-candidate.dto';
 import { UpdateCandidateDto } from './dto/update-candidate.dto';
+import { CreateUtilizadorDto } from '../utilizador/dto/create-utilizador.dto';
 
 @Controller('candidate')
 export class CandidateController {
   constructor(private readonly candidateService: CandidateService) {}
 
-  // @Post()
-  // async create(@Body() createCandidateDto: CreateCandidateDto) {
-  //   return this.candidateService.create(createCandidateDto);
-  // }
+  @Post()
+  async create(
+    @Body() createCandidateDto: CreateCandidateDto,
+    createUtilizadorDto: CreateUtilizadorDto,
+  ) {
+    return this.candidateService.create(
+      createCandidateDto,
+      createUtilizadorDto,
+    );
+  }
 
   @Get()
   async findAll() {

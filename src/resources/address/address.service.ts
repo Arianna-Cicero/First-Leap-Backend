@@ -40,7 +40,7 @@ export class AddressService {
     return addressUpdated;
   }
 
-  async remove(id: number) {
-    return await this.addressRepository.delete(id);
-  }
+  // async remove(id: number) {
+  //   return await this.addressRepository.delete(id);
+  // }
 }
