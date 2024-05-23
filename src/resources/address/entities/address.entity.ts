@@ -1,8 +1,8 @@
-import { Company } from 'src/resources/company/entities/company.entity';
-import { PostalCode } from 'src/resources/postal_code/entities/postal_code.entity';
+import { Test, TestingModule } from '@nestjs/testing';
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Company } from 'src/resources/company/entities/company.entity';
+import { PostalCode } from 'src/resources/postal_code/entities/postal_code.entity';
 @Entity('address')
 export class Address {
   @PrimaryGeneratedColumn({ type: 'int' })
