@@ -14,14 +14,14 @@ export class UtilizadorService {
     private readonly entityManager: EntityManager,
   ) {}
 
-  // async create(createUtilizadorDto: CreateUtilizadorDto) {
-  //   const hashedPassword = await encodePassword(createUtilizadorDto.password);
-  //   const utilizador = new Utilizador({
-  //     ...createUtilizadorDto,
-  //     password: hashedPassword,
-  //   });
-  //   await this.entityManager.save(utilizador);
-  // }
+  async create(createUtilizadorDto: CreateUtilizadorDto) {
+    const hashedPassword = await encodePassword(createUtilizadorDto.password);
+    const utilizador = new Utilizador({
+      ...createUtilizadorDto,
+      password: hashedPassword,
+    });
+    await this.entityManager.save(utilizador);
+  }
 
   async findUserByUsername(username: string) {
     const options: FindOneOptions = { where: { username } };

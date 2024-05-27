@@ -10,12 +10,12 @@ export class JobOfferService {
   constructor(
     @InjectRepository(JobOffer)
     private readonly jobofferRepository: Repository<JobOffer>,
-    private readonly entityManger: EntityManager,
+    private readonly entityManager: EntityManager,
   ) {}
-  async create(createJobOfferDto: CreateJobOfferDto) {
-    const joboffer = new JobOffer(createJobOfferDto);
-    await this.entityManger.save(joboffer);
-    return 'Oferta de trabalho criada!';
+
+  async create(createJobOfferDto: CreateJobOfferDto): Promise<JobOffer> {
+    const jobOffer = this.entityManager.create(JobOffer, createJobOfferDto);
+    return await this.entityManager.save(JobOffer, jobOffer);
   }
 
   async findAll() {

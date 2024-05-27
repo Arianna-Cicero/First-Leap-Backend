@@ -34,16 +34,16 @@ export class AdminController {
     return this.adminService.findOne(+id);
   }
 
-  // @Patch(':id')
-  // async update(
-  //   @Param('id') id: string,
-  //   @Body() updateAdminDto: UpdateAdminDto,
-  // ) {
-  //   return this.adminService.update(+id, updateAdminDto);
-  // }
+  @Patch(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateAdminDto: UpdateAdminDto,
+  ) {
+    return this.adminService.update(+id, updateAdminDto);
+  }
 
-  // @Delete(':id')
-  // async remove(@Param('id') id: string) {
-  //   return this.adminService.remove(+id);
-  // }
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.adminService.remove(+id);
+  }
 }

@@ -15,7 +15,7 @@ export class JobtypeService {
   async create(createJobTypeDto: CreateJobTypeDto) {
     const jobtype = new JobType(createJobTypeDto);
     await this.entityManger.save(jobtype);
-    return 'jobtype adicionada';
+    return jobtype;
   }
 
   async findAll() {

@@ -12,11 +12,12 @@ export class CompanyService {
     private readonly companyRepository: Repository<Company>,
     private readonly entityManager: EntityManager,
   ) {}
+
   async create(createCompanyDto: CreateCompanyDto) {
-    const company = new Company(createCompanyDto);
-    await this.entityManager.save(company);
-    return 'Nova company adicionada';
+    const company = await this.companyRepository.save(createCompanyDto);
+    return company;
   }
+  
 
   async findAll() {
     return this.companyRepository.find();

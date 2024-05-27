@@ -2,10 +2,6 @@ import { IsString, IsInt, Min, MinLength, MaxLength } from 'class-validator';
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
 
 export class CreateCandidateDto extends Utilizador {
-  @IsInt()
-  @Min(1)
-  candidate_id: number;
-
   cv: Buffer;
 
   @IsString()

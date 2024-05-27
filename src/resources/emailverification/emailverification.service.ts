@@ -12,11 +12,12 @@ export class EmailverificationService {
     private readonly emailRepository: Repository<Emailverification>,
     private readonly entityManager: EntityManager,
   ) {}
+  
   async create(createEmailverificationDto: CreateEmailverificationDto) {
-    const emailverification = new Emailverification(createEmailverificationDto);
-    await this.entityManager.save(emailverification);
-    return 'nuevo emailverification adicionado';
+    const newEmailverification = await this.emailRepository.save(createEmailverificationDto);
+    return newEmailverification;
   }
+  
 
   async findAll() {
     return await this.emailRepository.find();

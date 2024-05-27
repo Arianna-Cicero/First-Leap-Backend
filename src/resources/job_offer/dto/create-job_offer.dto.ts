@@ -1,8 +1,8 @@
-import { IsInt, IsString, Max } from 'class-validator';
+import { IsDate, IsInt, IsString, Max } from 'class-validator';
 
 export class CreateJobOfferDto {
   @IsInt()
-  JO: number;
+  JO_id: number;
 
   @IsString()
   title: string;
@@ -26,4 +26,7 @@ export class CreateJobOfferDto {
   @IsString()
   @Max(15)
   status: string;
+
+  @IsDate()
+  deadline: Date;
 }

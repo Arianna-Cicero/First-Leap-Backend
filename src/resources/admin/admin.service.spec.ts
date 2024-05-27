@@ -1,18 +1,62 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AdminService } from './admin.service';
+import { INestApplication } from '@nestjs/common';
+import * as request from 'supertest';
+import { AppModule } from 'src/app.module'; // Adjust the path as per your project structure
 
-describe('AdminService', () => {
-  let service: AdminService;
+describe('Admin (System Test)', () => {
+  let app: INestApplication;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [AdminService],
+  beforeAll(async () => {
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
     }).compile();
 
-    service = module.get<AdminService>(AdminService);
+    app = moduleFixture.createNestApplication();
+    await app.init();
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  afterAll(async () => {
+    await app.close();
+  });
+
+  describe('POST /admin', () => {
+    it('should create a new admin', async () => {
+      const adminData = {
+        position: 'Support',
+        utilizador: {
+          User_id: 1,
+          name: 'Joao',
+          username: 'joaotest',
+          password: 'joaotest',
+          number: 3192783,
+          email: 'test@gmail.com',
+          birth_date: undefined,
+          emailverification: undefined,
+        },
+      };
+
+      try {
+        const response = await request(app.getHttpServer())
+          .post('/admin')
+          .send(adminData)
+          .expect(201);
+
+        expect(response.body).toMatchObject({
+          position: 'Support',
+          utilizador: {
+            User_id: 1,
+            name: 'Joao',
+            username: 'joaotest',
+            number: 3192783,
+            email: 'test@gmail.com',
+            birth_date: null, // undefined becomes null in JSON responses
+            emailverification: null,
+          },
+        });
+      } catch (error) {
+        console.error('Error creating admin:', error);
+        fail('Failed to create admin');
+      }
+    });
   });
 });

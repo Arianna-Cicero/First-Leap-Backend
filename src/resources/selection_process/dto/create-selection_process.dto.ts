@@ -3,29 +3,27 @@ import { CreateSelectionphaseDto } from 'src/resources/selection_phase/dto/creat
 
 export class CreateSelectionprocessDto {
     @IsInt()
-    SP : number;
+    SP_id : number;
 
     @IsString()
     @MinLength(1)
     @MaxLength(250)
     description: string;
 
-    @IsString()
-    @MinLength(1)
-    @MaxLength(250)
-    vacancies: string;
+    @IsInt()
+    vacancies: number;
 
     @IsString()
     @MinLength(1)
     @MaxLength(250)
     phase: string;
 
-    @IsInt()
-    Recruiterrecruiter_id:number
+    // @IsInt()
+    // Recruiterrecruiter_id:number
 
-    @IsInt()
-    Vacancyvacancy_id:number
+    // @IsInt()
+    // Vacancyvacancy_id:number
 
-    selectionPhase: CreateSelectionphaseDto;
+    // selectionPhase: CreateSelectionphaseDto;
 
 }

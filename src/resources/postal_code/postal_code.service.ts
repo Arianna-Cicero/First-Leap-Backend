@@ -15,7 +15,7 @@ export class PostalCodeService {
   async create(createPostalCodeDto: CreatePostalCodeDto) {
     const postalcode = new PostalCode(createPostalCodeDto);
     await this.entityManager.save(postalcode);
-    return 'Novo postal code adicionado';
+    return postalcode;
   }
 
   async findAll() {
