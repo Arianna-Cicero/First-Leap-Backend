@@ -9,6 +9,7 @@ import { UtilizadorService } from 'src/resources/utilizador/utilizador.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
 import { AuthController } from './auth.controller';
+import { EmailService } from '@src/mailer/sendMail';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AuthController } from './auth.controller';
     TypeOrmModule.forFeature([Utilizador]),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy, UtilizadorService],
+  providers: [AuthService, LocalStrategy, JwtStrategy, UtilizadorService, EmailService],
+  exports: [EmailService],
 })
 export class AuthModule {}

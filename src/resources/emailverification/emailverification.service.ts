@@ -4,20 +4,21 @@ import { UpdateEmailverificationDto } from './dto/update-emailverification.dto';
 import { EntityManager, Repository } from 'typeorm';
 import { Emailverification } from './entities/emailverification.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Utilizador } from '../utilizador/entities/utilizador.entity';
 
 @Injectable()
 export class EmailverificationService {
   constructor(
     @InjectRepository(Emailverification)
     private readonly emailRepository: Repository<Emailverification>,
-    private readonly entityManager: EntityManager,
+    // private readonly entityManager: EntityManager,
+    // private readonly emailVerificationRepository: Repository<Emailverification>,
   ) {}
   
   async create(createEmailverificationDto: CreateEmailverificationDto) {
     const newEmailverification = await this.emailRepository.save(createEmailverificationDto);
     return newEmailverification;
   }
-  
 
   async findAll() {
     return await this.emailRepository.find();

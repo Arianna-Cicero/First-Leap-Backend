@@ -4,7 +4,7 @@ import { UpdateSelectionprocessDto } from './dto/update-selection_process.dto';
 //import { SelectionProcess } from './entities/selection_process.entity';
 //import { SelectionPhase } from '../selection_phase/entities/selection_phase.entity';
 import { SelectionPhaseService } from 'src/resources/selection_phase/selection_phase.service';
-import { EmailService } from 'src/services/email.service';
+// import { EmailService } from 'src/services/email.service';
 import { CandidateService } from '../candidate/candidate.service';
 import { ResumeParse } from '../../cv_validation/resume_parse';
 import * as fs from 'fs';
@@ -22,12 +22,12 @@ export class SelectionProcessService {
   ) {}
   private acceptedCandidateIds: number[] = [];
 
-  async create(createSelectionprocessDto: CreateSelectionprocessDto) {
-    const newSelectionProcess = await this.selectionPhaseService.create(
-      createSelectionprocessDto.selectionPhase,
-    );
-    return 'This action adds a new candidacy and selection process';
-  }
+  // async create(createSelectionprocessDto: CreateSelectionprocessDto) {
+  //   const newSelectionProcess = await this.selectionPhaseService.create(
+  //     createSelectionprocessDto.selectionPhase,
+  //   );
+  //   return 'This action adds a new candidacy and selection process';
+  // }
 
   async findAll() {
     return await this.selectionProcess.findAll();

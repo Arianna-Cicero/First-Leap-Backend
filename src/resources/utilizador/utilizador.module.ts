@@ -7,9 +7,11 @@ import { AdminModule } from '../admin/admin.module';
 import { CandidateModule } from '../candidate/candidate.module';
 import { RecruiterModule } from '../recruiter/recruiter.module';
 import { EmailverificationModule } from '../emailverification/emailverification.module';
+import { AuthModule } from '@src/auth/auth.module';
 
 @Module({
   imports: [
+    AuthModule,
     TypeOrmModule.forFeature([Utilizador]),
     forwardRef(() => AdminModule),
     forwardRef(() => CandidateModule),

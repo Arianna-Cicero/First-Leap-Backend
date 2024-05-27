@@ -5,13 +5,14 @@ import { EntityManager, Repository, FindOneOptions } from 'typeorm';
 import { Utilizador } from './entities/utilizador.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { encodePassword } from 'src/auth/bcrypt';
-
+import { EmailService } from '@src/mailer/sendMail';
 @Injectable()
 export class UtilizadorService {
   constructor(
     @InjectRepository(Utilizador)
     private userRepository: Repository<Utilizador>,
     private readonly entityManager: EntityManager,
+    private readonly emailService: EmailService,
   ) {}
 
   async create(createUtilizadorDto: CreateUtilizadorDto) {
@@ -20,6 +21,9 @@ export class UtilizadorService {
       ...createUtilizadorDto,
       password: hashedPassword,
     });
+    const emailTemplate = this.emailService.getEmailTemplate('verification_code');
+    await this.emailService.sendEmail(utilizador.email, emailTemplate.subject, emailTemplate.text, emailTemplate.html);
+
     await this.entityManager.save(utilizador);
   }
 
