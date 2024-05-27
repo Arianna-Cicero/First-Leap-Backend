@@ -9,8 +9,8 @@ export class Company {
   @Column({ type: 'char', length: 32 })
   name: string;
 
-  @Column({ type: 'char', length: 50 })
-  number: string;
+  @Column({ type: 'int'})
+  number: number;
 
   @OneToMany(() => Address, (address) => address.company)
   address: Address[];

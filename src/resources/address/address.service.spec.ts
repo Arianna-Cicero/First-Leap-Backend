@@ -34,20 +34,27 @@ describe('AddressService', () => {
     company: {
       company_id: 1,
       name: 'Company',
-      number: '3127931627',
+      number: 3127931627,
       address: [],
     },
   };
 
   const mockAddressRepository = {
-    findAll: jest.fn(), // Correct method name
-    find: jest.fn(), // Add find method here
+    findAll: jest.fn(),
+    find: jest.fn(),
+    findOne: jest.fn(),
+    update: jest.fn(),
+    create: jest.fn(),
+    save: jest.fn(),
   };
 
   const mockEntityManager = {
+    findAll: jest.fn(),
     find: jest.fn(),
+    findOne: jest.fn(),
+    update: jest.fn(),
+    create: jest.fn(),
     save: jest.fn(),
-    // Add other methods if necessary
   };
 
   beforeEach(async () => {
@@ -56,11 +63,11 @@ describe('AddressService', () => {
         AddressService,
         {
           provide: getRepositoryToken(Address),
-          useValue: mockAddressRepository, // Use mockAddressRepository here
+          useValue: mockAddressRepository,
         },
         {
           provide: EntityManager,
-          useValue: mockEntityManager, // Use mockEntityManager here
+          useValue: mockEntityManager,
         },
       ],
     }).compile();
@@ -75,13 +82,55 @@ describe('AddressService', () => {
   });
 
   describe('findAll', () => {
-    it('should return an array of address', async () => {
+    it('should return an array of addresses', async () => {
       jest.spyOn(addressRepository, 'find').mockResolvedValue([mockAddress]);
 
       const result = await service.findAll();
 
       expect(addressRepository.find).toHaveBeenCalled();
       expect(result).toEqual([mockAddress]);
+    });
+  });
+
+  describe('update', () => {
+    it('should update an address and return the updated address', async () => {
+      const updateAddressDto = { street: 'New Street' };
+      const updatedAddress = { ...mockAddress, ...updateAddressDto };
+
+      jest.spyOn(addressRepository, 'update').mockResolvedValue(undefined);
+      jest.spyOn(addressRepository, 'findOne').mockResolvedValue(updatedAddress);
+
+      const result = await service.update(mockAddress.address_id, updateAddressDto);
+
+      expect(addressRepository.update).toHaveBeenCalledWith(mockAddress.address_id, updateAddressDto);
+      expect(addressRepository.findOne).toHaveBeenCalledWith({ where: { address_id: mockAddress.address_id } });
+      expect(result).toEqual(updatedAddress);
+    });
+  });
+
+  describe('create', () => {
+    it('should create a new address', async () => {
+      const createAddressDto = {
+        address_id: 1, // Provide address_id as per the validation requirement
+        street: 'Rua do Orvalho',
+        city: 'Porto',
+        country: 'Espanha',
+        state: 'Florida',
+      };
+
+      const newAddress = {
+        ...createAddressDto,
+        utilizador: undefined, // Assuming nested entities are not set in this example
+        postalcode: undefined,
+        company: undefined,
+      };
+
+      jest.spyOn(addressRepository, 'save').mockResolvedValue(newAddress);
+
+      const result = await service.create(createAddressDto);
+
+      expect(addressRepository.save).toHaveBeenCalledWith(createAddressDto);
+      expect(result).toEqual(newAddress);
     });
   });
 });

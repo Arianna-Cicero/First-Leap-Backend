@@ -10,8 +10,7 @@ export class CreateCompanyDto {
   @MaxLength(32)
   name: string;
 
-  @IsString()
-  @MinLength(1)
-  @MaxLength(50)
-  number: string;
+  @IsInt()
+  @Min(1)
+  number: number;
 }

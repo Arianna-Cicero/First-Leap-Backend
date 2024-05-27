@@ -1,9 +1,9 @@
 import { IsString, IsInt, Min, MinLength, MaxLength } from 'class-validator';
 
 export class CreateRecruiterDto {
-    @IsInt()
-    @Min(1)
-    recruiter_id : number;
+    // @IsInt()
+    // @Min(1)
+    // recruiter_id : number;
 
     @IsString()
     @MinLength(1)

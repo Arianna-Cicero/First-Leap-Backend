@@ -17,7 +17,7 @@ export class AddressService {
   async create(createAddressDto: CreateAddressDto) {
     const address = new Address(createAddressDto);
     await this.addressRepository.save(address);
-    return 'Novo address criadod';
+    return address;
   }
 
   async findAll() {
