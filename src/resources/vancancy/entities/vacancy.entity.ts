@@ -7,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { SelectionProcess } from 'src/resources/selection_process/entities/selection_process.entity';
+import { JobOffer } from 'src/resources/job_offer/entities/job_offer.entity';
 
 @Entity('vacancy')
 export class Vacancy {
@@ -19,8 +20,8 @@ export class Vacancy {
   @Column({ type: 'char', length: 50 })
   description: string;
 
-  //@OneToMany(() => Candidate, (candidate) => candidate.vacancy)
-  //candidate: Candidate[];
+  @OneToMany(() => Candidate, (candidate) => candidate.vacancy)
+  candidate: Candidate[];
 
   @OneToMany(
     () => SelectionProcess,
@@ -28,6 +29,6 @@ export class Vacancy {
   )
   selectionProcess: SelectionProcess[];
 
-  // @OneToMany(() => Candidate, candidate => candidate.vacancy)
-  // candidate: Candidate;
+  @ManyToOne(() => JobOffer, (joboffer) => joboffer.vacancy)
+  joboffer: JobOffer;
 }

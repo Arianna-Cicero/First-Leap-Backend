@@ -4,6 +4,7 @@ import { RecruiterController } from './recruiter.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Recruiter } from './entities/recruiter.entity';
 import { UtilizadorModule } from '../utilizador/utilizador.module';
+import { Company } from '../company/entities/company.entity';
 
 @Module({
   imports: [

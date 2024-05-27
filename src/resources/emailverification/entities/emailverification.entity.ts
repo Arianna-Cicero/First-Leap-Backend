@@ -1,5 +1,11 @@
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('emailverification')
 export class Emailverification {
@@ -9,11 +15,14 @@ export class Emailverification {
   @Column({ type: 'int' })
   Verification_code: number;
 
-  @Column({ type: Date })
+  @Column({ type: 'timestamp' })
   expiry_datetime: Date;
 
-  @OneToMany(() => Utilizador, (utilizador) => utilizador.emailverification)
-  utilizador: Utilizador[];
+  @OneToOne(() => Utilizador, (utilizador) => utilizador.emailVerification, {
+    onDelete: 'CASCADE',
+  })
+  @JoinColumn()
+  utilizador: Utilizador;
 
   constructor(emailverification: Partial<Emailverification>) {
     Object.assign(this, emailverification);
