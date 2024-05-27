@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { EmailService } from 'src/mailer/sendMail';
 import { Emailverification } from 'src/resources/emailverification/entities/emailverification.entity';
-import { EmailService } from 'src/services/email.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Emailverification])],

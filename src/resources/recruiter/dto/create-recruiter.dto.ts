@@ -1,4 +1,4 @@
-import { IsString, IsInt, Min, MinLength, MaxLength } from 'class-validator';
+import { IsString, MinLength, MaxLength } from 'class-validator';
 
 export class CreateRecruiterDto {
     // @IsInt()
@@ -10,8 +10,8 @@ export class CreateRecruiterDto {
     @MaxLength(250)
     name : string;
 
-    @IsString()
-    @MinLength(1)
-    @MaxLength(250)
-    position: string;
+  @IsString()
+  @MinLength(1)
+  @MaxLength(250)
+  position: string;
 }

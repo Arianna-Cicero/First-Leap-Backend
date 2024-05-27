@@ -1,7 +1,6 @@
 import {
   IsDate,
   IsEmail,
-  IsNumber,
   IsString,
   MinLength,
   IsInt,
@@ -20,15 +19,15 @@ export class CreateUtilizadorDto extends LoginDto {
   @MaxLength(50)
   name: string;
 
-  // @IsString()
-  // @MinLength(1)
-  // @MaxLength(50)
-  // username: string;
+  @IsString()
+  @MinLength(1)
+  @MaxLength(50)
+  username: string;
 
-  // @IsString()
-  // @MinLength(1)
-  // @MaxLength(50)
-  // password: string;
+  @IsString()
+  @MinLength(1)
+  @MaxLength(50)
+  password: string;
 
   @IsInt()
   @Min(1)

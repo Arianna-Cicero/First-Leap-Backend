@@ -1,5 +1,14 @@
+import { Candidacy } from 'src/resources/candidacy/entities/candidacy.entity';
 import { JobType } from 'src/resources/jobtype/entities/job_type.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Recruiter } from 'src/resources/recruiter/entities/recruiter.entity';
+import { Vacancy } from 'src/resources/vancancy/entities/vacancy.entity';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 @Entity('job_offer')
 export class JobOffer {
   @PrimaryGeneratedColumn({ type: 'int' })
@@ -28,6 +37,15 @@ export class JobOffer {
 
   @ManyToOne(() => JobType, (jobType) => jobType.jobOffers)
   jobType: JobType;
+
+  @ManyToOne(() => Recruiter, (recruiter) => recruiter.joboffer)
+  recruiter: Recruiter;
+
+  @OneToMany(() => Candidacy, (candidacy) => candidacy.joboffer)
+  candidacy: Candidacy[];
+
+  @OneToMany(() => Vacancy, (vacancy) => vacancy.joboffer)
+  vacancy: Vacancy[];
 
   constructor(joboffer: Partial<JobOffer>) {
     Object.assign(this, joboffer);
