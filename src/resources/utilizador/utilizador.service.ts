@@ -4,11 +4,8 @@ import { Injectable } from '@nestjs/common';
 import { EntityManager, Repository, FindOneOptions } from 'typeorm';
 import { Utilizador } from './entities/utilizador.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { encodePassword } from 'src/auth/bcrypt';
-import { EmailService } from '@src/mailer/sendMail';
 import { EmailverificationService } from '../emailverification/emailverification.service';
-import { CreateUtilizadorDto } from './dto/create-utilizador.dto';
-import { UpdateUtilizadorDto } from './dto/update-utilizador.dto';
+// import { encodePassword } from 'src/auth/bcrypt';
 
 @Injectable()
 export class UtilizadorService {
@@ -16,8 +13,7 @@ export class UtilizadorService {
     @InjectRepository(Utilizador)
     private readonly userRepository: Repository<Utilizador>,
     private readonly entityManager: EntityManager,
-    private readonly emailService: EmailService,
-    private readonly emailVerificationService: EmailverificationService,
+    private readonly emailverificationService: EmailverificationService,
   ) {}
 
   private generateNumericVerificationCode(length: number = 6): string {
@@ -97,6 +93,10 @@ export class UtilizadorService {
         User_id: id,
       },
     });
+  }
+
+  async emailverification(codigo: number, id: number) {
+    const codigodb = await this.emailverificationService.findCode(id);
   }
 
   async update(

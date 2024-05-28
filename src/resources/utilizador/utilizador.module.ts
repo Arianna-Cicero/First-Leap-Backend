@@ -20,6 +20,6 @@ import { AuthModule } from '@src/auth/auth.module';
   ],
   controllers: [UtilizadorController],
   providers: [UtilizadorService],
-  exports: [UtilizadorService, TypeOrmModule],
+  exports: [UtilizadorService, TypeOrmModule, EmailverificationModule],
 })
 export class UtilizadorModule {}

@@ -6,7 +6,6 @@ import { DatabaseModule } from './database/database.module';
 import { APP_FILTER } from '@nestjs/core';
 import { GlobalExceptionFilter } from './exceptions/global-exception.filter';
 import { EmailverificationModule } from './resources/emailverification/emailverification.module';
-import { DatabaseService } from './services/database.service';
 import { HealthController } from './controllers/health.controller';
 import { PostalCodeModule } from './resources/postal_code/postal_code.module';
 import { JobOfferModule } from './resources/job_offer/job_offer.module';
@@ -16,7 +15,6 @@ import { CandidateModule } from './resources/candidate/candidate.module';
 import { AdminModule } from './resources/admin/admin.module';
 import { CandidateCandidacyModule } from './resources/candidate_candidacy/candidate_candidacy.module';
 import { RecruiterModule } from './resources/recruiter/recruiter.module';
-import { AuthModule } from './auth/auth.module';
 import { AddressModule } from './resources/address/address.module';
 import { CompanyModule } from './resources/company/company.module';
 import { CandidacyModule } from './resources/candidacy/candidacy.module';
@@ -25,10 +23,13 @@ import { SelectionPhaseModule } from './resources/selection_phase/selection_phas
 import { FeedbackModule } from './resources/feedback/feedback.module';
 import { VacancyModule } from './resources/vancancy/vacancy.module';
 import { ResultModule } from './resources/result/result.module';
+import { SchedulerModule } from './modules/scheduler.module';
+import { TypeSelectionProcessModule } from './resources/type_selection_process/type_selection_process.module';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    DatabaseModule, //
+    DatabaseModule,
     EmailverificationModule,
     PostalCodeModule,
     JobOfferModule,
@@ -39,7 +40,6 @@ import { ResultModule } from './resources/result/result.module';
     RecruiterModule,
     CandidateCandidacyModule,
     CandidacyModule,
-    AuthModule, //
     AddressModule,
     CompanyModule,
     SelectionProcessModule,
@@ -47,12 +47,13 @@ import { ResultModule } from './resources/result/result.module';
     FeedbackModule,
     VacancyModule,
     ResultModule,
+    SchedulerModule,
+    TypeSelectionProcessModule,
   ],
   controllers: [AppController, HealthController],
   providers: [
     { provide: APP_FILTER, useClass: GlobalExceptionFilter },
     AppService,
-    DatabaseService,
   ],
 })
 export class AppModule {}

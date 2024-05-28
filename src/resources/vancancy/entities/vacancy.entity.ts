@@ -6,7 +6,6 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { SelectionProcess } from 'src/resources/selection_process/entities/selection_process.entity';
 import { JobOffer } from 'src/resources/job_offer/entities/job_offer.entity';
 
 @Entity('vacancy')
@@ -23,12 +22,10 @@ export class Vacancy {
   @OneToMany(() => Candidate, (candidate) => candidate.vacancy)
   candidate: Candidate[];
 
-  @OneToMany(
-    () => SelectionProcess,
-    (selectionProcess) => selectionProcess.vacancy,
-  )
-  selectionProcess: SelectionProcess[];
-
   @ManyToOne(() => JobOffer, (joboffer) => joboffer.vacancy)
   joboffer: JobOffer;
+
+  constructor(vacancy: Partial<Vacancy>) {
+    Object.assign(this, vacancy);
+  }
 }

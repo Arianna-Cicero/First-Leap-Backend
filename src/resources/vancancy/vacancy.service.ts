@@ -13,14 +13,13 @@ export class VacancyService {
   ) {}
 
   async create(createVacancyDto: CreateVacancyDto): Promise<Vacancy> {
-    const { title, description, Job_OfferJO_id } = createVacancyDto;
+    // const { title, description, Job_OfferJO_id } = createVacancyDto;
 
-    if (!title || !description || !Job_OfferJO_id) {
-      throw new BadRequestException(
-        'Title, description, and job offer are required.',
-      );
-    }
-
+    // if (!title || !description || !Job_OfferJO_id) {
+    //   throw new BadRequestException(
+    //     'Title, description, and job offer are required.',
+    //   );
+    // }
     const vacancy = this.vacancyRepository.create(createVacancyDto);
     return await this.vacancyRepository.save(vacancy);
   }
@@ -33,7 +32,10 @@ export class VacancyService {
     return await this.vacancyRepository.findOne({ where: { vacancy_id: id } });
   }
 
-  async update(id: number, updateVacancyDto: UpdateVacancyDto): Promise<Vacancy> {
+  async update(
+    id: number,
+    updateVacancyDto: UpdateVacancyDto,
+  ): Promise<Vacancy> {
     await this.vacancyRepository.update(id, updateVacancyDto);
     return await this.vacancyRepository.findOne({ where: { vacancy_id: id } });
   }

@@ -7,7 +7,7 @@
 
 //   @Post('send')
 //   async sendEmail() {
-//     const to = ['xyz@xyz.com'];
+//     const to = 'xyz@xyz.com';
 //     const subject = 'Validation Code';
 //     const text = 'Here is your validation code xxx-xxx';
 //     const html = '<b>testtest?</b>';
