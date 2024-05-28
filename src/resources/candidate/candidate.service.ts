@@ -5,7 +5,6 @@ import { Candidate } from './entities/candidate.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
 import { CreateUtilizadorDto } from '../utilizador/dto/create-utilizador.dto';
-import { Utilizador } from '../utilizador/entities/utilizador.entity';
 
 @Injectable()
 export class CandidateService {
@@ -19,7 +18,7 @@ export class CandidateService {
     createUtilizadorDto: CreateUtilizadorDto,
   ) {
     const candidate = new Candidate(createCandidateDto, createUtilizadorDto);
-    await this.candidateRepository.save(candidate);
+    await this.entityManager.save(candidate);
     return 'Candidato creado';
   }
 
@@ -30,6 +29,13 @@ export class CandidateService {
   async findOne(id: number) {
     return await this.candidateRepository.findOne({
       where: { User_id: id },
+    });
+  }
+
+  async findCandidateEmail(id: number) {
+    return await this.candidateRepository.findOne({
+      where: { User_id: id },
+      select: ['email'],
     });
   }
 
@@ -60,7 +66,7 @@ export class CandidateService {
     return updatedCandidate;
   }
 
-  // async remove(id: number) {
-  //   return await this.candidateRepository.delete(id);
-  // }
+  async remove(id: number) {
+    return await this.candidateRepository.delete(id);
+  }
 }

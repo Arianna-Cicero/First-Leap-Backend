@@ -4,7 +4,8 @@ import { UpdateUtilizadorDto } from './dto/update-utilizador.dto';
 import { EntityManager, Repository, FindOneOptions } from 'typeorm';
 import { Utilizador } from './entities/utilizador.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { encodePassword } from 'src/auth/bcrypt';
+import { EmailverificationService } from '../emailverification/emailverification.service';
+// import { encodePassword } from 'src/auth/bcrypt';
 
 @Injectable()
 export class UtilizadorService {
@@ -12,6 +13,7 @@ export class UtilizadorService {
     @InjectRepository(Utilizador)
     private userRepository: Repository<Utilizador>,
     private readonly entityManager: EntityManager,
+    private readonly emailverificationService: EmailverificationService,
   ) {}
 
   async create(createUtilizadorDto: CreateUtilizadorDto) {
@@ -38,6 +40,10 @@ export class UtilizadorService {
         User_id: id,
       },
     });
+  }
+
+  async emailverification(codigo: number, id: number) {
+    const codigodb = await this.emailverificationService.findCode(id);
   }
 
   async update(

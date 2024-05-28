@@ -15,7 +15,7 @@ export class ResultService {
   async create(createResultDto: CreateResultDto) {
     const result = new Result(createResultDto);
     await this.entityManager.save(result);
-    return 'Novo result adicionado';
+    return `Novo result adicionado: #${result}`;
   }
 
   async findAll() {

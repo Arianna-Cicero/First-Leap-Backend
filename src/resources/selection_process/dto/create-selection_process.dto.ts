@@ -1,29 +1,22 @@
-import { IsString, IsInt, MinLength, MaxLength } from 'class-validator';
-import { CreateSelectionphaseDto } from 'src/resources/selection_phase/dto/create-selection_phase.dto';
+import { IsString, IsInt, MinLength, MaxLength, IsDate } from 'class-validator';
 
 export class CreateSelectionprocessDto {
-    @IsInt()
-    SP_id : number;
+  @IsInt()
+  SP: number;
 
-    @IsString()
-    @MinLength(1)
-    @MaxLength(250)
-    description: string;
+  @IsString()
+  @MinLength(1)
+  @MaxLength(250)
+  description: string;
 
-    @IsInt()
-    vacancies: number;
+  @IsString()
+  @MinLength(1)
+  @MaxLength(250)
+  vacancies: string;
 
-    @IsString()
-    @MinLength(1)
-    @MaxLength(250)
-    phase: string;
+  @IsInt()
+  phase: number;
 
-    // @IsInt()
-    // Recruiterrecruiter_id:number
-
-    // @IsInt()
-    // Vacancyvacancy_id:number
-
-    // selectionPhase: CreateSelectionphaseDto;
-
+  @IsDate()
+  starting_date: Date;
 }

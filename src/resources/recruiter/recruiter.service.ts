@@ -47,7 +47,7 @@ export class RecruiterService {
   //   return await this.recruiterRepository.save(recruiter);
   // }
 
-  // async remove(id: number) {
-  //   return await this.recruiterRepository.delete(id);
-  // }
+  async remove(id: number) {
+    return await this.recruiterRepository.delete(id);
+  }
 }

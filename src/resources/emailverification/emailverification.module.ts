@@ -8,5 +8,6 @@ import { Emailverification } from './entities/emailverification.entity';
   imports: [TypeOrmModule.forFeature([Emailverification])],
   controllers: [EmailverificationController],
   providers: [EmailverificationService],
+  exports: [EmailverificationService],
 })
 export class EmailverificationModule {}

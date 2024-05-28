@@ -1,9 +1,9 @@
-import { Module, forwardRef } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { forwardRef, Module } from '@nestjs/common';
 import { Candidate } from './entities/candidate.entity';
-import { CandidateService } from './candidate.service';
-import { CandidateController } from './candidate.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UtilizadorModule } from '../utilizador/utilizador.module';
+import { CandidateController } from './candidate.controller';
+import { CandidateService } from './candidate.service';
 
 @Module({
   imports: [
