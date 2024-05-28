@@ -10,6 +10,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
 import { AuthController } from './auth.controller';
 import { EmailService } from '@src/mailer/sendMail';
+import { EmailverificationModule } from '@src/resources/emailverification/emailverification.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { EmailService } from '@src/mailer/sendMail';
       signOptions: { expiresIn: '1h' },
     }),
     TypeOrmModule.forFeature([Utilizador]),
+    EmailverificationModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy, UtilizadorService, EmailService],

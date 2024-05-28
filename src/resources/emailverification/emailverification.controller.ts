@@ -27,10 +27,10 @@ export class EmailverificationController {
     return this.emailverificationService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return this.emailverificationService.findOne(+id);
-  }
+  // @Get(':id')
+  // async findOne(@Param('id') id: string) {
+  //   return this.emailverificationService.findOne(+id);
+  // }
 
   @Patch(':id')
   async update(

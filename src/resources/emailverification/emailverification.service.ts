@@ -11,10 +11,25 @@ export class EmailverificationService {
   constructor(
     @InjectRepository(Emailverification)
     private readonly emailRepository: Repository<Emailverification>,
-    // private readonly entityManager: EntityManager,
-    // private readonly emailVerificationRepository: Repository<Emailverification>,
   ) {}
+
+  async createVerificationRecord(verificationCode: number, utilizador: Utilizador, entityManager: EntityManager) {
+    const emailVerification = this.emailRepository.create({
+        utilizador: utilizador,
+        expiry_datetime: new Date(Date.now() + 24 * 60 * 60 * 1000), // One day from now
+        Verification_code: verificationCode,
+    });
+    await entityManager.save(emailVerification); // Using the transactional entity manager
+  }
   
+  async findByUserId(userId: number): Promise<Emailverification | undefined> {
+    return this.emailRepository.findOne({ where: { utilizador: { User_id: userId } } });
+  }
+
+  async removeByUserId(userId: number): Promise<void> {
+    await this.emailRepository.delete({ utilizador: { User_id: userId } });
+  }
+
   async create(createEmailverificationDto: CreateEmailverificationDto) {
     const newEmailverification = await this.emailRepository.save(createEmailverificationDto);
     return newEmailverification;
@@ -24,11 +39,19 @@ export class EmailverificationService {
     return await this.emailRepository.find();
   }
 
-  async findOne(id: number) {
+  async findCode(userId: number) {
     return await this.emailRepository.find({
       where: {
-        email_ver_id: id,
+        utilizador: { User_id: userId },
       },
+      select: ['Verification_code'],
+    });
+  }
+
+
+  async findOneByUserId(userId: number) {
+    return await this.emailRepository.findOne({
+      where: { utilizador: { User_id: userId } },
     });
   }
 
@@ -40,16 +63,9 @@ export class EmailverificationService {
     const updatedEmail = await this.emailRepository.findOne({
       where: { email_ver_id: id },
     });
-    await this.emailRepository.find;
     if (!updatedEmail) {
-      throw new Error('Email nao foi encontrado');
+      throw new Error('Email verification record not found');
     }
-
     return updatedEmail;
   }
-
-  // async remove(id: number) {
-  //   await this.emailRepository.delete(id);
-  //   return `emailverification de ID #${id} eliminado`;
-  // }
 }
