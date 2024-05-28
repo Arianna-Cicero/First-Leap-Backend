@@ -1,6 +1,7 @@
 import { Candidacy } from 'src/resources/candidacy/entities/candidacy.entity';
 import { JobType } from 'src/resources/jobtype/entities/job_type.entity';
 import { Recruiter } from 'src/resources/recruiter/entities/recruiter.entity';
+import { SelectionProcess } from 'src/resources/selection_process/entities/selection_process.entity';
 import { Vacancy } from 'src/resources/vancancy/entities/vacancy.entity';
 import {
   Column,
@@ -46,6 +47,12 @@ export class JobOffer {
 
   @OneToMany(() => Vacancy, (vacancy) => vacancy.joboffer)
   vacancy: Vacancy[];
+
+  @OneToMany(
+    () => SelectionProcess,
+    (selectionProcess) => selectionProcess.job_offer,
+  )
+  selectionProcess: SelectionProcess[];
 
   constructor(joboffer: Partial<JobOffer>) {
     Object.assign(this, joboffer);

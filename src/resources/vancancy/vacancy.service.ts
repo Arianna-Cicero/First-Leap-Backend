@@ -1,34 +1,47 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { CreateVacancyDto } from './dto/create-vacancy.dto';
 import { UpdateVacancyDto } from './dto/update-vacancy.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Vacancy } from './entities/vacancy.entity';
 
 @Injectable()
 export class VacancyService {
-  create(createVacancyDto: CreateVacancyDto) {
-    const { title, description, Job_OfferJO_id } = createVacancyDto;
+  constructor(
+    @InjectRepository(Vacancy)
+    private readonly vacancyRepository: Repository<Vacancy>,
+  ) {}
 
-    if (!title || !description || !Job_OfferJO_id) {
-      throw new BadRequestException(
-        'Title, description, and job offer are required.',
-      );
-    }
+  async create(createVacancyDto: CreateVacancyDto): Promise<Vacancy> {
+    // const { title, description, Job_OfferJO_id } = createVacancyDto;
 
-    return 'This action adds a new vacancy';
+    // if (!title || !description || !Job_OfferJO_id) {
+    //   throw new BadRequestException(
+    //     'Title, description, and job offer are required.',
+    //   );
+    // }
+
+    const vacancy = this.vacancyRepository.create(createVacancyDto);
+    return await this.vacancyRepository.save(vacancy);
   }
 
-  findAll() {
-    return `This action returns all vacancy`;
+  async findAll(): Promise<Vacancy[]> {
+    return await this.vacancyRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} vacancy`;
+  async findOne(id: number): Promise<Vacancy> {
+    return await this.vacancyRepository.findOne({ where: { vacancy_id: id } });
   }
 
-  update(id: number, updateVacancyDto: UpdateVacancyDto) {
-    return `This action updates a #${id} vacancy`;
+  async update(
+    id: number,
+    updateVacancyDto: UpdateVacancyDto,
+  ): Promise<Vacancy> {
+    await this.vacancyRepository.update(id, updateVacancyDto);
+    return await this.vacancyRepository.findOne({ where: { vacancy_id: id } });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} vacancy`;
+  async remove(id: number): Promise<void> {
+    await this.vacancyRepository.delete(id);
   }
 }

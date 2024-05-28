@@ -33,6 +33,9 @@ export class Utilizador {
   @Column({ type: 'date' })
   birth_date: Date;
 
+  @Column({ type: 'boolean', default: false })
+  verificado: Boolean;
+
   @OneToMany(() => Address, (address) => address.utilizador)
   address: Address[];
 

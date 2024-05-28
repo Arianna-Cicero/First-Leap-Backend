@@ -15,12 +15,6 @@ export class Recruiter extends Utilizador {
   @ManyToOne(() => Utilizador, { cascade: true, eager: true })
   utilizador: Utilizador;
 
-  @OneToMany(
-    () => SelectionProcess,
-    (selectionProcess) => selectionProcess.recruiter,
-  )
-  selectionProcess: SelectionProcess[];
-
   @OneToMany(() => JobOffer, (joboffer) => joboffer.recruiter)
   joboffer: JobOffer[];
 

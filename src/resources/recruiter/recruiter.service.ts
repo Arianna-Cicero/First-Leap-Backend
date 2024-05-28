@@ -36,7 +36,7 @@ export class RecruiterService {
     return `This action updates a #${id} recruiter`;
   }
 
-  // async remove(id: number) {
-  //   return await this.recruiterRepository.delete(id);
-  // }
+  async remove(id: number) {
+    return await this.recruiterRepository.delete(id);
+  }
 }

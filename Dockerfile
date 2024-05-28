@@ -1,14 +1,22 @@
 # Use the official Node.js 14 image
-FROM node:14
+FROM node:20.13.1
+
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y \
+    unixodbc unixodbc-dev
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
 # Install dependencies
 RUN npm install
+
+# Rebuild bcrypt
+RUN npm rebuild bcrypt --build-from-source
 
 # Copy the rest of the application code
 COPY . .

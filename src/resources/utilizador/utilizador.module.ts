@@ -18,6 +18,6 @@ import { EmailverificationModule } from '../emailverification/emailverification.
   ],
   controllers: [UtilizadorController],
   providers: [UtilizadorService],
-  exports: [UtilizadorService, TypeOrmModule],
+  exports: [UtilizadorService, TypeOrmModule, EmailverificationModule],
 })
 export class UtilizadorModule {}
