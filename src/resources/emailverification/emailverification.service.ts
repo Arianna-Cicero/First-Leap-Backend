@@ -55,14 +55,14 @@ export class EmailverificationService {
     });
   }
 
-  async findCode(id: number) {
-    return await this.emailRepository.find({
-      where: {
-        email_ver_id: id,
-      },
-      select: ['Verification_code'],
-    });
-  }
+  // async findCode(id: number) {
+  //   return await this.emailRepository.find({
+  //     where: {
+  //       email_ver_id: id,
+  //     },
+  //     select: ['Verification_code'],
+  //   });
+  // }
 
   async update(
     id: number,

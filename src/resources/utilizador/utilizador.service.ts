@@ -5,7 +5,10 @@ import { EntityManager, Repository, FindOneOptions } from 'typeorm';
 import { Utilizador } from './entities/utilizador.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EmailverificationService } from '../emailverification/emailverification.service';
-// import { encodePassword } from 'src/auth/bcrypt';
+import { UpdateUtilizadorDto } from './dto/update-utilizador.dto';
+import { EmailService } from '@src/mailer/sendMail';
+import { CreateUtilizadorDto } from './dto/create-utilizador.dto';
+import { encodePassword } from 'src/auth/bcrypt';
 
 @Injectable()
 export class UtilizadorService {
@@ -13,7 +16,8 @@ export class UtilizadorService {
     @InjectRepository(Utilizador)
     private readonly userRepository: Repository<Utilizador>,
     private readonly entityManager: EntityManager,
-    private readonly emailverificationService: EmailverificationService,
+    private readonly emailVerificationService: EmailverificationService,
+    private readonly emailService : EmailService
   ) {}
 
   private generateNumericVerificationCode(length: number = 6): string {
@@ -32,7 +36,7 @@ export class UtilizadorService {
 
     if (codigodb.length > 0 && codigodb[0].Verification_code) {
       if (codigo === codigodb[0].Verification_code) {
-        await this.userRepository.update(userId, { verified: true });
+        await this.userRepository.update(userId, { verificado: true });
 
         return { success: true, message: 'Verification successful' };
       } else {
@@ -43,31 +47,37 @@ export class UtilizadorService {
     }
   }
 
+  
   async create(createUtilizadorDto: CreateUtilizadorDto): Promise<Utilizador> {
+    // Hash the password
     const hashedPassword = await encodePassword(createUtilizadorDto.password);
 
+    // Create a new user with the hashed password
     const utilizador = this.userRepository.create({
       ...createUtilizadorDto,
       password: hashedPassword,
     });
 
+    // Save the new user to the database
     const savedUtilizador = await this.userRepository.save(utilizador);
 
-    const verificationCode = parseInt(
-      this.generateNumericVerificationCode(),
-      10,
-    );
+    // Generate a verification code
+    const verificationCode = parseInt(this.generateNumericVerificationCode(), 10);
 
-    await this.emailVerificationService.createVerificationRecord( 
+    // Create a verification record
+    await this.emailVerificationService.createVerificationRecord(
       verificationCode,
       savedUtilizador,
-      this.entityManager
+      this.entityManager,
     );
 
+    // Prepare the email template
     const emailTemplate = this.emailService.getEmailTemplate(
       'verification_code',
       verificationCode.toString(),
     );
+
+    // Send the verification email
     await this.emailService.sendEmail(
       savedUtilizador.email,
       emailTemplate.subject,
@@ -75,9 +85,10 @@ export class UtilizadorService {
       emailTemplate.html,
     );
 
+    // Return the saved user
     return savedUtilizador;
   }
-
+  
   async findUserByUsername(username: string) {
     const options: FindOneOptions = { where: { username } };
     return this.userRepository.findOne(options);
@@ -95,9 +106,9 @@ export class UtilizadorService {
     });
   }
 
-  async emailverification(codigo: number, id: number) {
-    const codigodb = await this.emailverificationService.findCode(id);
-  }
+  // async emailverification(codigo: number, id: number) {
+  //   const codigodb = await this.emailverificationService.findCode(id);
+  // }
 
   async update(
     id: number,

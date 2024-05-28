@@ -25,18 +25,18 @@ export class ResultController {
     return this.resultService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.resultService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.resultService.findOne(+id);
+  // }
 
-  @Patch(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateResultDto: UpdateResultDto,
-  ) {
-    return this.resultService.update(+id, updateResultDto);
-  }
+  // @Patch(':id')
+  // async update(
+  //   @Param('id') id: string,
+  //   @Body() updateResultDto: UpdateResultDto,
+  // ) {
+  //   return this.resultService.update(+id, updateResultDto);
+  // }
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
