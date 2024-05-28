@@ -17,10 +17,7 @@ export class SchedulerService {
         const selectionProcesses = offer.selectionProcess;
         if (selectionProcesses && selectionProcesses.length > 0) {
           for (const sp of selectionProcesses) {
-            await this.jobOfferService.startSelectionProcess(
-              offer.JO_id,
-              sp.SP_id,
-            );
+            await this.jobOfferService.startSelectionProcess(sp.SP_id);
           }
         }
       }

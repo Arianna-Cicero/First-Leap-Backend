@@ -9,6 +9,7 @@ export class AuthController {
   @UseGuards(AuthGuard('local'))
   @Post('login')
   async login(@Request() req) {
-    return this.authService.login(req.user.username, req.user.password);
+    const { username, password } = req.body;
+    return this.authService.login(username, password);
   }
 }
