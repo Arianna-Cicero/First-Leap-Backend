@@ -5,10 +5,10 @@ import { EntityManager, Repository, FindOneOptions } from 'typeorm';
 import { Utilizador } from './entities/utilizador.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EmailverificationService } from '../emailverification/emailverification.service';
-import { UpdateUtilizadorDto } from './dto/update-utilizador.dto';
+import { encodePassword } from '@src/auth/bcrypt';
 import { EmailService } from '@src/mailer/sendMail';
 import { CreateUtilizadorDto } from './dto/create-utilizador.dto';
-import { encodePassword } from 'src/auth/bcrypt';
+import { UpdateUtilizadorDto } from './dto/update-utilizador.dto';
 
 @Injectable()
 export class UtilizadorService {
@@ -17,7 +17,7 @@ export class UtilizadorService {
     private readonly userRepository: Repository<Utilizador>,
     private readonly entityManager: EntityManager,
     private readonly emailVerificationService: EmailverificationService,
-    private readonly emailService : EmailService
+    private readonly emailService: EmailService,
   ) {}
 
   private generateNumericVerificationCode(length: number = 6): string {
@@ -47,7 +47,6 @@ export class UtilizadorService {
     }
   }
 
-  
   async create(createUtilizadorDto: CreateUtilizadorDto): Promise<Utilizador> {
     // Hash the password
     const hashedPassword = await encodePassword(createUtilizadorDto.password);
@@ -62,7 +61,10 @@ export class UtilizadorService {
     const savedUtilizador = await this.userRepository.save(utilizador);
 
     // Generate a verification code
-    const verificationCode = parseInt(this.generateNumericVerificationCode(), 10);
+    const verificationCode = parseInt(
+      this.generateNumericVerificationCode(),
+      10,
+    );
 
     // Create a verification record
     await this.emailVerificationService.createVerificationRecord(
@@ -88,7 +90,7 @@ export class UtilizadorService {
     // Return the saved user
     return savedUtilizador;
   }
-  
+
   async findUserByUsername(username: string) {
     const options: FindOneOptions = { where: { username } };
     return this.userRepository.findOne(options);

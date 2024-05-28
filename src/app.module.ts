@@ -25,6 +25,7 @@ import { VacancyModule } from './resources/vancancy/vacancy.module';
 import { ResultModule } from './resources/result/result.module';
 import { SchedulerModule } from './modules/scheduler.module';
 import { TypeSelectionProcessModule } from './resources/type_selection_process/type_selection_process.module';
+import { QuizModule } from './resources/type_selection_process/quiz/quiz.module';
 
 @Module({
   imports: [
@@ -49,6 +50,7 @@ import { TypeSelectionProcessModule } from './resources/type_selection_process/t
     ResultModule,
     SchedulerModule,
     TypeSelectionProcessModule,
+    QuizModule,
   ],
   controllers: [AppController, HealthController],
   providers: [

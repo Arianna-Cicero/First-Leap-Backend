@@ -45,8 +45,8 @@ export class RecruiterController {
   //   return this.recruiterService.update(+id, updateRecruiterDto);
   // }
 
-  // @Delete(':id')
-  // async remove(@Param('id') id: string) {
-  //   return this.recruiterService.remove(+id);
-  // }
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.recruiterService.remove(+id);
+  }
 }

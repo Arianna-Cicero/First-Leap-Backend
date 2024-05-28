@@ -35,4 +35,7 @@ export class TypeSelectionProcessService {
   async remove(id: number) {
     return this.typeSPrepo.delete(id);
   }
+
+  async Interview() {}
+  async ProgrammingChallenge() {}
 }
