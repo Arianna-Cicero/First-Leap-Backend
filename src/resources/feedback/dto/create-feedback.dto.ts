@@ -10,6 +10,4 @@ export class CreateFeedbackDto {
   @MaxLength(250)
   feedback_desc: string;
 
-  @IsInt()
-  Selection_PhaseSPH_id: number;
 }

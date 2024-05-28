@@ -21,8 +21,8 @@ export class SelectionProcess {
   @Column({ type: 'char', length: 250 })
   description: string;
 
-  @Column({ type: 'char', length: 250 })
-  vacancies: string;
+  @Column({ type: 'int'})
+  vacancies: number;
 
   @Column({ type: 'char', length: 250 })
   phase: number;

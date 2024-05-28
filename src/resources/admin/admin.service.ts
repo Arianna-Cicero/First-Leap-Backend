@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,15 +13,20 @@ export class AdminService {
     private readonly adminRepository: Repository<Admin>,
     private readonly entityManager: EntityManager,
   ) {}
+
   async create(
     createAdminDto: CreateAdminDto,
     createUtilizadorDto: CreateUtilizadorDto,
   ) {
-    const admin = new Admin(createAdminDto, createUtilizadorDto);
-    await this.adminRepository.save(admin);
-    return 'Admin creado';
+    try {
+      const admin = new Admin(createAdminDto, createUtilizadorDto);
+      await this.adminRepository.save(admin);
+      return 'Admin creado';
+    } catch (error) {
+      console.error('Error in AdminService.create:', error);
+      throw new InternalServerErrorException('Failed to create admin');
+    }
   }
-
   async findAll() {
     return await this.adminRepository.find();
   }
@@ -48,8 +53,8 @@ export class AdminService {
     return adminUpdated;
   }
 
-  // async remove(id: number) {
-  //   await this.adminRepository.delete(id);
-  //   return `admin de id #${id} eliminado`;
-  // }
+  async remove(id: number) {
+    await this.adminRepository.delete(id);
+    return `admin de id #${id} eliminado`;
+  }
 }

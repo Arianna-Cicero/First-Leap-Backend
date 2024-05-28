@@ -20,7 +20,6 @@ export class VacancyService {
     //     'Title, description, and job offer are required.',
     //   );
     // }
-
     const vacancy = this.vacancyRepository.create(createVacancyDto);
     return await this.vacancyRepository.save(vacancy);
   }

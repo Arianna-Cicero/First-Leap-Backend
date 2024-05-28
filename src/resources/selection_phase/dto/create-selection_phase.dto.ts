@@ -17,7 +17,4 @@ export class CreateSelectionphaseDto {
     @MinLength(1)
     @MaxLength(250)
     process: string;
-
-    @IsInt()
-    Selection_ProcessSP_id: number;
 }
