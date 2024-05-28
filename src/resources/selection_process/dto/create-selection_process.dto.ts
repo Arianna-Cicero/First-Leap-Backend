@@ -1,4 +1,4 @@
-import { IsString, IsInt, MinLength, MaxLength, IsDate } from 'class-validator';
+import { IsString, IsInt, MinLength, MaxLength, IsDate, isInt } from 'class-validator';
 
 export class CreateSelectionprocessDto {
   @IsInt()
@@ -9,10 +9,9 @@ export class CreateSelectionprocessDto {
   @MaxLength(250)
   description: string;
 
-  @IsString()
+  @IsInt()
   @MinLength(1)
-  @MaxLength(250)
-  vacancies: string;
+  vacancies: number;
 
   @IsInt()
   phase: number;

@@ -22,14 +22,18 @@ export class ResultService {
     return await this.resultRepository.find();
   }
 
-  async findOne(id: number) {
-    return await this.resultRepository.findOne({ where: { result_id: id } });
-  }
-
-  async update(id: number, updateResultDto: UpdateResultDto) {
-    return `This action updates a #${id} result`;
-  }
-
+  // async findOne(id: number) {
+  //   return await this.resultRepository.findOne(id);
+  // }  
+  
+  // async update(id: number, updateResultDto: UpdateResultDto) {
+  //   const result = await this.resultRepository.findOneOrFail(id);
+  //   Object.assign(result, updateResultDto);
+  //   await this.resultRepository.save(result);
+  //   return result;
+  // }
+  
+  
   async remove(id: number) {
     return await this.resultRepository.delete(id);
   }

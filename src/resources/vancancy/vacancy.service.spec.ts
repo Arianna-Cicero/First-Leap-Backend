@@ -14,8 +14,9 @@ describe('VacancyService', () => {
     vacancy_id: 2,
     title: 'Test',
     description: 'Test',
-    Job_OfferJO_id: 1,
+    joboffer: undefined,
     selectionProcess: undefined,
+    candidate: undefined,
   };
 
   const mockVacancyRepository = {
@@ -95,6 +96,8 @@ describe('VacancyService', () => {
       const newVacancy = {
         ...createVacancyDto,
         selectionProcess: undefined,
+        candidate: undefined, 
+        joboffer: undefined,
       };
 
       jest.spyOn(vacancyRepository, 'create').mockReturnValue(newVacancy);

@@ -1,4 +1,5 @@
-import { IsInt, IsTimeZone, Max, Min } from 'class-validator';
+import { Utilizador } from '@src/resources/utilizador/entities/utilizador.entity';
+import { IsBoolean, IsInt, IsTimeZone, Max, Min } from 'class-validator';
 
 export class CreateEmailverificationDto {
   @IsInt()
@@ -9,4 +10,9 @@ export class CreateEmailverificationDto {
 
   @IsTimeZone()
   expiry_datetime: Date;
+  
+  @IsBoolean()
+  verified: Boolean;
+
+  utilizador: Utilizador; 
 }

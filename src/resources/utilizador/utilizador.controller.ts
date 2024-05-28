@@ -25,6 +25,11 @@ export class UtilizadorController {
     return this.utilizadorService.findAll();
   }
 
+  @Post('verify-email')
+  async verifyEmail(@Body() body: { codigo: number; userId: number }) {
+    return this.utilizadorService.emailverification(body.codigo, body.userId);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.utilizadorService.findOne(+id);

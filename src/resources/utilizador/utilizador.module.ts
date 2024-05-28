@@ -7,17 +7,21 @@ import { AdminModule } from '../admin/admin.module';
 import { CandidateModule } from '../candidate/candidate.module';
 import { RecruiterModule } from '../recruiter/recruiter.module';
 import { EmailverificationModule } from '../emailverification/emailverification.module';
+import { AuthModule } from '@src/auth/auth.module';
+import { EmailModule } from '@src/modules/email.module';
 
 @Module({
   imports: [
+    AuthModule,
     TypeOrmModule.forFeature([Utilizador]),
     forwardRef(() => AdminModule),
     forwardRef(() => CandidateModule),
     forwardRef(() => RecruiterModule),
     forwardRef(() => EmailverificationModule),
+    EmailModule,
   ],
   controllers: [UtilizadorController],
   providers: [UtilizadorService],
-  exports: [UtilizadorService, TypeOrmModule, EmailverificationModule],
+  exports: [UtilizadorService, TypeOrmModule, EmailverificationModule, UtilizadorService],
 })
 export class UtilizadorModule {}

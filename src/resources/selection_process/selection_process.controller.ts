@@ -17,10 +17,10 @@ export class SelectionProcessController {
     private readonly selectionProcessService: SelectionProcessService,
   ) {}
 
-  @Post()
-  create(@Body() createSelectionProcessDto: CreateSelectionprocessDto) {
-    return this.selectionProcessService.create(createSelectionProcessDto);
-  }
+  // @Post()
+  // create(@Body() createSelectionProcessDto: CreateSelectionprocessDto) {
+  //   return this.selectionProcessService.create(createSelectionProcessDto);
+  // }
 
   @Get()
   async findAll() {

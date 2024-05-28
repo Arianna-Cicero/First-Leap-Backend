@@ -21,6 +21,11 @@ describe('RecruiterService', () => {
     number: 938208,
     email: 'cris@gmail.com',
     birth_date: undefined,
+    company: undefined,
+    utilizador: undefined,
+    joboffer: undefined,
+    verified: false,
+    emailVerification: undefined,
     address: [
       {
         address_id: 1,
@@ -86,10 +91,10 @@ describe('RecruiterService', () => {
         .spyOn(recruiterRepository, 'find')
         .mockResolvedValue([mockRecruiter]);
 
-        const result = await service.findAll();
+      const result = await service.findAll();
 
-        expect(recruiterRepository.find).toHaveBeenCalled();
-        expect(result).toEqual([mockRecruiter]);
+      expect(recruiterRepository.find).toHaveBeenCalled();
+      expect(result).toEqual([mockRecruiter]);
     });
   });
 
@@ -135,12 +140,19 @@ describe('RecruiterService', () => {
         ...createUtilizadorDto,
         selectionProcess: undefined,
         address: [],
-        emailverification: undefined
+        company: undefined,
+        utilizador: undefined,
+        joboffer: undefined,
+        verified: undefined,
+        emailVerification: undefined,
       };
 
       jest.spyOn(recruiterRepository, 'save').mockResolvedValue(newRecruiter);
 
-      const result = await service.create(createRecruiterDto, createUtilizadorDto);
+      const result = await service.create(
+        createRecruiterDto,
+        createUtilizadorDto,
+      );
 
       expect(recruiterRepository.save).toHaveBeenCalledWith(
         expect.objectContaining(newRecruiter),
@@ -148,5 +160,4 @@ describe('RecruiterService', () => {
       expect(result).toEqual(newRecruiter);
     });
   });
-  
 });

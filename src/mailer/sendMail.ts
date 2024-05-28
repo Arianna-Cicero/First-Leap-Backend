@@ -34,8 +34,8 @@
 //   '<b>congrats!!</b>',
 // );
 import { Injectable } from '@nestjs/common';
-import nodemailer from 'nodemailer';
 import * as dotenv from 'dotenv';
+import * as nodemailer from 'nodemailer';
 
 dotenv.config();
 

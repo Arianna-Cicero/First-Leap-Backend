@@ -25,6 +25,8 @@ describe('AddressService', () => {
       birth_date: undefined,
       address: [],
       emailverification: undefined,
+      verified: false, 
+      emailVerification: undefined
     },
     postalcode: {
       pc: 1,

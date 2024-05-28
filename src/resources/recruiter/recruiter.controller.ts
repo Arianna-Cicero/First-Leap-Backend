@@ -32,18 +32,18 @@ export class RecruiterController {
     return this.recruiterService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return this.recruiterService.findOne(+id);
-  }
+  // @Get(':id')
+  // async findOne(@Param('id') id: string) {
+  //   return this.recruiterService.findOne(+id);
+  // }
 
-  @Patch(':id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateRecruiterDto: UpdateRecruiterDto,
-  ) {
-    return this.recruiterService.update(+id, updateRecruiterDto);
-  }
+  // @Patch(':id')
+  // async update(
+  //   @Param('id') id: string,
+  //   @Body() updateRecruiterDto: UpdateRecruiterDto,
+  // ) {
+  //   return this.recruiterService.update(+id, updateRecruiterDto);
+  // }
 
   // @Delete(':id')
   // async remove(@Param('id') id: string) {
