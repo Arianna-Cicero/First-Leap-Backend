@@ -106,9 +106,13 @@ export class UtilizadorService {
     });
   }
 
-  // async emailverification(codigo: number, id: number) {
-  //   const codigodb = await this.emailverificationService.findCode(id);
-  // }
+  async findIfVerified(userId: number): Promise<boolean> {
+    const user = await this.userRepository.findOne({
+      where: { User_id: userId },
+      select: ['verificado'],
+    });
+    return user ? user.verificado : false; // Ensure this returns a boolean primitive
+  }
 
   async update(
     id: number,

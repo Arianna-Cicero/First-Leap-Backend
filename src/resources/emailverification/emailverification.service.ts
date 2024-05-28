@@ -49,6 +49,7 @@ export class EmailverificationService {
   }
 
 
+
   async findOneByUserId(userId: number) {
     return await this.emailRepository.findOne({
       where: { utilizador: { User_id: userId } },

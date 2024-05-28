@@ -21,7 +21,7 @@ export class Utilizador {
   @Column({ type: 'char', length: 50 })
   username: string;
 
-  @Column({ type: 'char', length: 50 })
+  @Column({ type: 'char', length: 60 })
   password: string;
 
   @Column({ type: 'int' })
@@ -34,7 +34,7 @@ export class Utilizador {
   birth_date: Date;
 
   @Column({ type: 'boolean', default: false })
-  verificado: Boolean;
+  verificado: boolean;
 
   @OneToMany(() => Address, (address) => address.utilizador)
   address: Address[];
