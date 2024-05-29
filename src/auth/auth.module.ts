@@ -4,7 +4,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
 // import { LocalStrategy } from './utils/LocalStrategy';
 import { jwtConstants } from './utils/constants';
-// import { JwtStrategy } from './utils/jwt.strategy';
+import { JwtStrategy } from './utils/jwt.strategy';
 import { UtilizadorService } from 'src/resources/utilizador/utilizador.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Utilizador } from 'src/resources/utilizador/entities/utilizador.entity';
@@ -27,6 +27,6 @@ import { LocalStrategy } from './LocalStrategy';
     forwardRef(() => UtilizadorModule), 
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, /*JwtStrategy,*/ UtilizadorService],
+  providers: [AuthService, LocalStrategy, JwtStrategy, UtilizadorService],
 })
 export class AuthModule {}
