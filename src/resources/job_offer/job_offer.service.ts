@@ -70,10 +70,6 @@ export class JobOfferService {
     return { id: savedJobOffer.JO_id };
   }
 
-  myid() {
-    return this.myID;
-  }
-
   async findAll() {
     return this.jobofferRepo.find();
   }
@@ -86,9 +82,9 @@ export class JobOfferService {
     });
   }
 
-  async findDeadlineById(): Promise<Date | null> {
+  async findDeadlineById(id: number): Promise<Date | null> {
     const jobOffer = await this.jobofferRepo.findOne({
-      where: { JO_id: this.myID },
+      where: { JO_id: id },
       select: ['deadline'],
     });
     if (jobOffer) {
@@ -119,8 +115,8 @@ export class JobOfferService {
     return currentDate;
   }
 
-  async startSelectionProcess(joid: number, spid: number) {
-    const deadline = await this.findDeadlineById();
+  async startSelectionProcess(joid: number) {
+    const deadline = await this.findDeadlineById(joid);
     const starting_date = await this.starting_date();
     if (deadline === starting_date) {
       const candidates = await this.candidateService.findAll();

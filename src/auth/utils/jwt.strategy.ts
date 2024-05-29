@@ -14,7 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(username: string, password: string, verificado: boolean) {
-    return this.authService.validateUser(username, password, verificado);
+  async validate(username: string, password: string) {
+    return this.authService.validateUser(username, password);
   }
 }
