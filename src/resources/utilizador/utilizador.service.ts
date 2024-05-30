@@ -1,12 +1,10 @@
-// utilizador.service.ts
-
 import { Injectable } from '@nestjs/common';
 import { EntityManager, Repository, FindOneOptions } from 'typeorm';
 import { Utilizador } from './entities/utilizador.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EmailverificationService } from '../emailverification/emailverification.service';
-import { encodePassword } from '@src/auth/bcrypt';
-import { EmailService } from '@src/mailer/sendMail';
+import { encodePassword } from '../../auth/bcrypt';
+import { EmailService } from '../../mailer/sendMail';
 import { CreateUtilizadorDto } from './dto/create-utilizador.dto';
 import { UpdateUtilizadorDto } from './dto/update-utilizador.dto';
 

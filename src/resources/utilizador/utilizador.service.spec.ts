@@ -19,7 +19,8 @@ describe('UtilizadorService', () => {
     email: 'johndoe@example.com',
     birth_date: new Date('1990-01-01'),
     address: [],
-    emailverification: null,
+    verificado: false,
+    emailVerification: null,
   };
 
   const mockUtilizadorRepository = {
@@ -139,4 +140,6 @@ describe('UtilizadorService', () => {
   //     expect(utilizadorRepository.delete).toHaveBeenCalledWith(mockUtilizador.User_id);
   //   });
   // });
+
+  
 });
