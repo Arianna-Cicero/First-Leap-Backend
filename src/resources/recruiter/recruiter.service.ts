@@ -19,7 +19,7 @@ export class RecruiterService {
   ) {
     const recruiter = new Recruiter(createRecruiterDto, createUtilizadorDto);
     await this.entityManager.save(recruiter);
-    return 'Recrutador criado';
+    return recruiter;
   }
 
   async findAll() {
