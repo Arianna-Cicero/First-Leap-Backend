@@ -13,17 +13,23 @@ export class EmailverificationService {
     private readonly emailRepository: Repository<Emailverification>,
   ) {}
 
-  async createVerificationRecord(verificationCode: number, utilizador: Utilizador, entityManager: EntityManager) {
+  async createVerificationRecord(
+    verificationCode: number,
+    utilizador: Utilizador,
+    entityManager: EntityManager,
+  ) {
     const emailVerification = this.emailRepository.create({
-        utilizador: utilizador,
-        expiry_datetime: new Date(Date.now() + 24 * 60 * 60 * 1000), // One day from now
-        Verification_code: verificationCode,
+      utilizador: utilizador,
+      expiry_datetime: new Date(Date.now() + 24 * 60 * 60 * 1000), // One day from now
+      Verification_code: verificationCode,
     });
     await entityManager.save(emailVerification); // Using the transactional entity manager
   }
-  
+
   async findByUserId(userId: number): Promise<Emailverification | undefined> {
-    return this.emailRepository.findOne({ where: { utilizador: { User_id: userId } } });
+    return this.emailRepository.findOne({
+      where: { utilizador: { User_id: userId } },
+    });
   }
 
   async removeByUserId(userId: number): Promise<void> {
@@ -31,7 +37,9 @@ export class EmailverificationService {
   }
 
   async create(createEmailverificationDto: CreateEmailverificationDto) {
-    const newEmailverification = await this.emailRepository.save(createEmailverificationDto);
+    const newEmailverification = await this.emailRepository.save(
+      createEmailverificationDto,
+    );
     return newEmailverification;
   }
 
@@ -47,8 +55,6 @@ export class EmailverificationService {
       select: ['Verification_code'],
     });
   }
-
-
 
   async findOneByUserId(userId: number) {
     return await this.emailRepository.findOne({

@@ -5,7 +5,6 @@ import { comparePasswords } from 'src/auth/bcrypt';
 
 @Injectable()
 export class AuthService {
-
   constructor(
     private utilizadorService: UtilizadorService,
     private jwtService: JwtService,
@@ -42,7 +41,7 @@ export class AuthService {
 
     const payload = {
       username: validatedUser.username,
-      sub: validatedUser.User_id, 
+      sub: validatedUser.User_id,
     };
 
     const accessToken = this.generateJwtToken(payload);

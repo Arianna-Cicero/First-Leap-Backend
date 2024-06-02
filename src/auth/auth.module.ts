@@ -16,17 +16,24 @@ import { LocalStrategy } from './LocalStrategy';
 
 @Module({
   imports: [
-    forwardRef(() => PassportModule), 
+    forwardRef(() => PassportModule),
     JwtModule.register({
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '60m' },
     }),
     TypeOrmModule.forFeature([Utilizador]),
-    forwardRef(() => EmailverificationModule), 
-    forwardRef(() => EmailModule), 
-    forwardRef(() => UtilizadorModule), 
+    forwardRef(() => EmailverificationModule),
+    forwardRef(() => EmailModule),
+    forwardRef(() => UtilizadorModule),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy, UtilizadorService],
+  providers: [
+    AuthService,
+    LocalStrategy,
+    JwtStrategy,
+    UtilizadorService,
+    // OAuth2Strategy,
+    // GoogleStrategy,
+  ],
 })
 export class AuthModule {}
