@@ -15,25 +15,25 @@ export class Utilizador {
   @PrimaryGeneratedColumn({ type: 'int' })
   User_id: number;
 
-  @Column({ type: 'char', length: 50 })
+  @Column({ type: 'char', length: 50, nullable: true })
   name: string;
 
-  @Column({ type: 'char', length: 50 })
+  @Column({ type: 'char', length: 50, nullable: true })
   username: string;
 
-  @Column({ type: 'char', length: 60 })
+  @Column({ type: 'char', length: 60, nullable: true })
   password: string;
 
-  @Column({ type: 'int' })
+  @Column({ type: 'int', nullable: true })
   number: number;
 
-  @Column({ type: 'char', length: 50 })
+  @Column({ type: 'char', length: 50, nullable: true })
   email: string;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: true })
   birth_date: Date;
 
-  @Column({ type: 'boolean', default: false })
+  @Column({ type: 'boolean', default: false, nullable: true })
   verificado: boolean;
 
   @OneToMany(() => Address, (address) => address.utilizador)

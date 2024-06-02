@@ -10,10 +10,6 @@ import {
 import { LoginDto } from 'src/auth/dto/login.dto';
 
 export class CreateUtilizadorDto extends LoginDto {
-  @IsInt()
-  @Min(1)
-  User_id: number;
-
   @IsString()
   @MinLength(1)
   @MaxLength(50)
@@ -26,7 +22,7 @@ export class CreateUtilizadorDto extends LoginDto {
 
   @IsString()
   @MinLength(1)
-  @MaxLength(50)
+  @MaxLength(60)
   password: string;
 
   @IsInt()
@@ -38,4 +34,6 @@ export class CreateUtilizadorDto extends LoginDto {
 
   @IsDate()
   birth_date: Date;
+
+  verificado?: boolean; // Optional
 }

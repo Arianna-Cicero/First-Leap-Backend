@@ -5,6 +5,10 @@ import { Candidate } from './entities/candidate.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EntityManager, Repository } from 'typeorm';
 import { CreateUtilizadorDto } from '../utilizador/dto/create-utilizador.dto';
+import { UtilizadorService } from '../utilizador/utilizador.service';
+import { EmailverificationService } from '../emailverification/emailverification.service';
+import { EmailService } from '@src/mailer/sendMail';
+import { encodePassword } from '../../auth/bcrypt';
 
 @Injectable()
 export class CandidateService {
@@ -12,14 +16,74 @@ export class CandidateService {
     @InjectRepository(Candidate)
     private readonly candidateRepository: Repository<Candidate>,
     private readonly entityManager: EntityManager,
+    private readonly utilizadorService: UtilizadorService,
+    private readonly emailVerificationService: EmailverificationService,
+    private readonly emailService: EmailService,
   ) {}
+
+  private generateNumericVerificationCode(length: number = 6): string {
+    const characters = '0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length),
+      );
+    }
+    return result;
+  }
+
+  async emailverification(codigo: number, userId: number) {
+    const codigodb = await this.emailVerificationService.findCode(userId);
+
+    if (codigodb.length > 0 && codigodb[0].Verification_code) {
+      if (codigo === codigodb[0].Verification_code) {
+        await this.candidateRepository.update(userId, { verificado: true });
+
+        return { success: true, message: 'Verification successful' };
+      } else {
+        return { success: false, message: 'Verification code does not match' };
+      }
+    } else {
+      return { success: false, message: 'Verification code not found' };
+    }
+  }
+
   async create(
     createCandidateDto: CreateCandidateDto,
     createUtilizadorDto: CreateUtilizadorDto,
-  ) {
-    const candidate = new Candidate(createCandidateDto, createUtilizadorDto);
-    await this.entityManager.save(candidate);
-    return 'Candidato creado';
+  ): Promise<Candidate> {
+    return this.entityManager.transaction(async (manager) => {
+      createUtilizadorDto.password = await encodePassword(
+        createUtilizadorDto.password,
+      );
+
+      const utilizador =
+        await this.utilizadorService.create(createUtilizadorDto);
+      const candidate = new Candidate(createCandidateDto, utilizador);
+      candidate.utilizador = utilizador;
+      const savedCandidate = await manager.save(candidate);
+
+      const emailVerification =
+        this.emailVerificationService.createVerificationRecord(
+          parseInt(this.generateNumericVerificationCode(), 10),
+          savedCandidate,
+          manager,
+        );
+
+      const emailTemplate = this.emailService.getEmailTemplate(
+        'verification_code',
+        emailVerification.toString(),
+      );
+
+      await this.emailService.sendEmail(
+        savedCandidate.email,
+        emailTemplate.subject,
+        emailTemplate.text,
+        emailTemplate.html,
+      );
+
+      return savedCandidate;
+    });
   }
 
   async findAll(): Promise<Candidate[]> {

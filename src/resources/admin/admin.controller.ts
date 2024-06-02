@@ -11,6 +11,7 @@ import { AdminService } from './admin.service';
 import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 import { CreateUtilizadorDto } from '../utilizador/dto/create-utilizador.dto';
+import { Admin } from './entities/admin.entity';
 
 @Controller('admin')
 export class AdminController {
@@ -19,9 +20,14 @@ export class AdminController {
   @Post()
   async create(
     @Body() createAdminDto: CreateAdminDto,
-    createUtilizadorDto: CreateUtilizadorDto,
-  ) {
+    @Body() createUtilizadorDto: CreateUtilizadorDto,
+  ): Promise<Admin> {
     return this.adminService.create(createAdminDto, createUtilizadorDto);
+  }
+
+  @Post('verify-email')
+  async verifyEmail(@Body() body: { codigo: number; userId: number }) {
+    return this.adminService.emailverification(body.codigo, body.userId);
   }
 
   @Get()

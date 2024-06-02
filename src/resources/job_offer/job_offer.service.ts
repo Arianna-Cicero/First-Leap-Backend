@@ -16,6 +16,7 @@ import { CreateVacancyDto } from '../vancancy/dto/create-vacancy.dto';
 import { Recruiter } from '../recruiter/entities/recruiter.entity';
 import { CreateRecruiterDto } from '../recruiter/dto/create-recruiter.dto';
 import { CreateUtilizadorDto } from '../utilizador/dto/create-utilizador.dto';
+import { EmailverificationService } from '../emailverification/emailverification.service';
 
 @Injectable()
 export class JobOfferService {
