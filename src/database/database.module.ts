@@ -15,6 +15,7 @@ import { DatabaseService } from 'src/services/database.service';
         password: configService.getOrThrow('MYSQL_PASSWORD'),
         autoLoadEntities: true,
         synchronize: configService.getOrThrow('MYSQL_SYNCHRONIZE'),
+        // logging: true,
       }),
       inject: [ConfigService],
     }),

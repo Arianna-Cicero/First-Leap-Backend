@@ -14,36 +14,36 @@ export class UtilizadorService {
     @InjectRepository(Utilizador)
     private readonly userRepository: Repository<Utilizador>,
     private readonly entityManager: EntityManager,
-    private readonly emailVerificationService: EmailverificationService,
-    private readonly emailService: EmailService,
+    // private readonly emailVerificationService: EmailverificationService,
+    // private readonly emailService: EmailService,
   ) {}
 
-  private generateNumericVerificationCode(length: number = 6): string {
-    const characters = '0123456789';
-    let result = '';
-    for (let i = 0; i < length; i++) {
-      result += characters.charAt(
-        Math.floor(Math.random() * characters.length),
-      );
-    }
-    return result;
-  }
+  // private generateNumericVerificationCode(length: number = 6): string {
+  //   const characters = '0123456789';
+  //   let result = '';
+  //   for (let i = 0; i < length; i++) {
+  //     result += characters.charAt(
+  //       Math.floor(Math.random() * characters.length),
+  //     );
+  //   }
+  //   return result;
+  // }
 
-  async emailverification(codigo: number, userId: number) {
-    const codigodb = await this.emailVerificationService.findCode(userId);
+  // async emailverification(codigo: number, userId: number) {
+  //   const codigodb = await this.emailVerificationService.findCode(userId);
 
-    if (codigodb.length > 0 && codigodb[0].Verification_code) {
-      if (codigo === codigodb[0].Verification_code) {
-        await this.userRepository.update(userId, { verificado: true });
+  //   if (codigodb.length > 0 && codigodb[0].Verification_code) {
+  //     if (codigo === codigodb[0].Verification_code) {
+  //       await this.userRepository.update(userId, { verificado: true });
 
-        return { success: true, message: 'Verification successful' };
-      } else {
-        return { success: false, message: 'Verification code does not match' };
-      }
-    } else {
-      return { success: false, message: 'Verification code not found' };
-    }
-  }
+  //       return { success: true, message: 'Verification successful' };
+  //     } else {
+  //       return { success: false, message: 'Verification code does not match' };
+  //     }
+  //   } else {
+  //     return { success: false, message: 'Verification code not found' };
+  //   }
+  // }
 
   async create(createUtilizadorDto: CreateUtilizadorDto): Promise<Utilizador> {
     // Hash the password
@@ -55,35 +55,38 @@ export class UtilizadorService {
       password: hashedPassword,
     });
 
+    if (utilizador) console.log(hashedPassword);
+    console.log(hashedPassword);
+
     // Save the new user to the database
-    const savedUtilizador = await this.userRepository.save(utilizador);
+    const savedUtilizador = await this.entityManager.save(utilizador);
 
     // Generate a verification code
-    const verificationCode = parseInt(
-      this.generateNumericVerificationCode(),
-      10,
-    );
+    // const verificationCode = parseInt(
+    //   this.generateNumericVerificationCode(),
+    //   10,
+    // );
 
     // Create a verification record
-    await this.emailVerificationService.createVerificationRecord(
-      verificationCode,
-      savedUtilizador,
-      this.entityManager,
-    );
+    // await this.emailVerificationService.createVerificationRecord(
+    //   verificationCode,
+    //   savedUtilizador,
+    //   this.entityManager,
+    // );
 
     // Prepare the email template
-    const emailTemplate = this.emailService.getEmailTemplate(
-      'verification_code',
-      verificationCode.toString(),
-    );
+    // const emailTemplate = this.emailService.getEmailTemplate(
+    //   'verification_code',
+    //   verificationCode.toString(),
+    // );
 
     // Send the verification email
-    await this.emailService.sendEmail(
-      savedUtilizador.email,
-      emailTemplate.subject,
-      emailTemplate.text,
-      emailTemplate.html,
-    );
+    // await this.emailService.sendEmail(
+    //   savedUtilizador.email,
+    //   emailTemplate.subject,
+    //   emailTemplate.text,
+    //   emailTemplate.html,
+    // );
 
     // Return the saved user
     return savedUtilizador;

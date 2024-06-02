@@ -5,13 +5,13 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity('candidate')
 export class Candidate extends Utilizador {
-  @Column({ type: 'blob' })
+  @Column({ type: 'blob', nullable: true })
   cv: Buffer;
 
-  @Column({ type: 'char', length: 50 })
+  @Column({ type: 'char', length: 50, nullable: true })
   skills: string;
 
-  @Column({ type: 'char', length: 50 })
+  @Column({ type: 'char', length: 50, nullable: true })
   experience: string;
 
   @OneToMany(
