@@ -1,62 +1,52 @@
-// import nodemailer from 'nodemailer';
-// import dotenv from 'dotenv';
-// dotenv.config();
-
-// const transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: process.env.USER,
-//     pass: process.env.APP_PASSWORD,
-//   },
-// });
-
-// export const sendMail = async (to, subject, text, html) => {
-//   const mailOptions = {
-//     from: process.env.USER,
-//     to: to,
-//     subject: subject,
-//     text: text,
-//     html: html,
-//   };
-
-//   try {
-//     await transporter.sendMail(mailOptions);
-//     console.log('Email Sent');
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
-
-// sendMail(
-//   ['xyz@xyz.com'],
-//   'verification codes',
-//   'heres your verification code 123123',
-//   '<b>congrats!!</b>',
-// );
 import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import * as dotenv from 'dotenv';
+import { google } from 'googleapis';
+import { OAuth2Client } from 'google-auth-library';
 
 dotenv.config();
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.USER,
-    pass: process.env.APP_PASSWORD,
-  },
-});
-
 @Injectable()
 export class EmailService {
+  private oauth2Client: OAuth2Client;
+
+  constructor() {
+    this.oauth2Client = new google.auth.OAuth2(
+      process.env.CLIENT_ID,
+      process.env.CLIENT_SECRET,
+      process.env.REDIRECT_URI,
+    );
+
+    this.oauth2Client.setCredentials({
+      refresh_token: process.env.REFRESH_TOKEN,
+    });
+  }
+
+  private async createTransport() {
+    const accessToken = await this.oauth2Client.getAccessToken();
+
+    return nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        type: 'OAuth2',
+        user: process.env.USER,
+        clientId: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
+        refreshToken: process.env.REFRESH_TOKEN,
+        accessToken: accessToken.token,
+      },
+    });
+  }
+
   async sendEmail(
     to: string,
     subject: string,
     text: string,
     html: string,
   ): Promise<void> {
+    const transporter = await this.createTransport();
     const mailOptions = {
-      from: process.env.USER,
+      from: 'First Leap <process.env.USER>',
       to: to,
       subject: subject,
       text: text,
@@ -71,13 +61,53 @@ export class EmailService {
     }
   }
 
+  async sendCalendarInvite(
+    to: string,
+    subject: string,
+    description: string,
+    startTime: Date,
+    endTime: Date,
+  ): Promise<void> {
+    const calendar = google.calendar({
+      version: 'v3',
+      auth: this.oauth2Client,
+    });
+
+    const event = {
+      summary: subject,
+      description: description,
+      start: {
+        dateTime: startTime.toISOString(),
+      },
+      end: {
+        dateTime: endTime.toISOString(),
+      },
+      attendees: [{ email: to }],
+      reminders: {
+        useDefault: true,
+      },
+    };
+
+    try {
+      const response = await calendar.events.insert({
+        calendarId: 'primary',
+        requestBody: event,
+        sendUpdates: 'all',
+      });
+
+      console.log('Calendar invite sent: ', response.data);
+    } catch (error) {
+      console.error('Error sending calendar invite:', error);
+    }
+  }
+
   getEmailTemplate(feedbackType: string, verificationCode?: string) {
     switch (feedbackType) {
       case 'invalid_cv':
         return {
           subject: 'Invalid CV',
           text: 'Your CV is invalid. Please update and try again.',
-          html: '<p>Your CV is invalid. You do not posses the requirements.</p>',
+          html: '<p>Your CV is invalid. You do not possess the requirements.</p>',
         };
       case 'next_phase':
         return {
