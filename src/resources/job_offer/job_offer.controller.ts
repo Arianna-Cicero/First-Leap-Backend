@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  NotFoundException,
 } from '@nestjs/common';
 import { JobOfferService } from './job_offer.service';
 import { CreateJobOfferDto } from './dto/create-job_offer.dto';
@@ -14,6 +15,7 @@ import { CreateSelectionprocessDto } from '../selection_process/dto/create-selec
 import { CreateVacancyDto } from '../vancancy/dto/create-vacancy.dto';
 import { CreateRecruiterDto } from '../recruiter/dto/create-recruiter.dto';
 import { CreateUtilizadorDto } from '../utilizador/dto/create-utilizador.dto';
+import { JobOffer } from './entities/job_offer.entity';
 
 @Controller('job-offer')
 export class JobOfferController {
@@ -42,8 +44,12 @@ export class JobOfferController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number) {
-    return this.jobOfferService.findOne(+id);
+  async findOne(@Param('id') id: number): Promise<JobOffer> {
+    const jobOffer = await this.jobOfferService.findOne(id);
+    if (!jobOffer) {
+      throw new NotFoundException('Job offer not found');
+    }
+    return jobOffer;
   }
 
   @Patch(':id')

@@ -233,4 +233,5 @@ export class JobOfferService {
       await this.sendFeedback(candidate.User_id, 'not_selected');
     }
   }
+  
 }

@@ -5,6 +5,7 @@ import { SelectionProcess } from 'src/resources/selection_process/entities/selec
 import { Vacancy } from 'src/resources/vancancy/entities/vacancy.entity';
 import {
   Column,
+  CreateDateColumn,
   Entity,
   ManyToOne,
   OneToMany,
@@ -15,25 +16,28 @@ export class JobOffer {
   @PrimaryGeneratedColumn({ type: 'int' })
   JO_id: number;
 
-  @Column({ type: 'char', length: 50 })
+  @Column({ type: 'char', length: 50, nullable:true })
   title: string;
 
-  @Column({ type: 'char', length: 250 })
+  @Column({ type: 'char', length: 250, nullable:true})
   description: string;
 
-  @Column({ type: 'char', length: 250 })
+  @Column({ type: 'char', length: 250, nullable:true })
   requisites: string;
 
-  @Column({ type: 'char', length: 250 })
+  @Column({ type: 'char', length: 250, nullable:true })
   responsibilities: string;
 
-  @Column({ type: 'char', length: 250 })
+  @Column({ type: 'char', length: 250, nullable:true })
   benefits: string;
 
-  @Column({ type: 'char', length: 15 })
-  status: string;
+  @Column({ type: 'char', length: 15 , default: true, nullable:true})
+  status: string; 
 
-  @Column({ type: 'date' })
+  @CreateDateColumn({ type: 'datetime' })
+  date_created: Date;
+
+  @Column({ type: 'date', nullable:true})
   deadline: Date;
 
   @ManyToOne(() => JobType, (jobType) => jobType.jobOffers)
