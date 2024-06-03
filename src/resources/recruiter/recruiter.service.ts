@@ -61,25 +61,18 @@ export class RecruiterService {
       const savedRecruiter = await manager.save(recruiter);
 
       // Generate a verification code
-      const verificationCode = parseInt(
-        this.generateNumericVerificationCode(),
-        10,
-      );
-
-      // Create EmailVerification and link with Utilizador
+      const verificationCode = this.generateNumericVerificationCode();
       await this.emailVerificationService.createVerificationRecord(
-        verificationCode,
+        parseInt(verificationCode, 10),
         savedRecruiter,
         manager,
       );
 
-      // Prepare the email template
       const emailTemplate = this.emailService.getEmailTemplate(
         'verification_code',
-        verificationCode.toString(),
+        verificationCode,
       );
 
-      // Send the verification email
       await this.emailService.sendEmail(
         savedRecruiter.email,
         emailTemplate.subject,

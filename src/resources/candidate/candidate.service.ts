@@ -63,16 +63,16 @@ export class CandidateService {
       candidate.utilizador = utilizador;
       const savedCandidate = await manager.save(candidate);
 
-      const emailVerification =
-        this.emailVerificationService.createVerificationRecord(
-          parseInt(this.generateNumericVerificationCode(), 10),
-          savedCandidate,
-          manager,
-        );
+      const verificationCode = this.generateNumericVerificationCode();
+      await this.emailVerificationService.createVerificationRecord(
+        parseInt(verificationCode, 10),
+        savedCandidate,
+        manager,
+      );
 
       const emailTemplate = this.emailService.getEmailTemplate(
         'verification_code',
-        emailVerification.toString(),
+        verificationCode,
       );
 
       await this.emailService.sendEmail(

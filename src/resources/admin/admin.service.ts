@@ -61,26 +61,19 @@ export class AdminService {
       const admin = new Admin(createAdminDto, utilizador);
       admin.utilizador = utilizador;
       const savedAdmin = await manager.save(admin);
-      // Generate a verification code
-      const verificationCode = parseInt(
-        this.generateNumericVerificationCode(),
-        10,
-      );
 
-      // Create EmailVerification and link with Utilizador
+      const verificationCode = this.generateNumericVerificationCode();
       await this.emailVerificationService.createVerificationRecord(
-        verificationCode,
+        parseInt(verificationCode, 10),
         savedAdmin,
         manager,
       );
 
-      // Prepare the email template
       const emailTemplate = this.emailService.getEmailTemplate(
         'verification_code',
-        verificationCode.toString(),
+        verificationCode,
       );
 
-      // Send the verification email
       await this.emailService.sendEmail(
         savedAdmin.email,
         emailTemplate.subject,
