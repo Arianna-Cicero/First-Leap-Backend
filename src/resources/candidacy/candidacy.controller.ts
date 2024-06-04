@@ -15,6 +15,11 @@ import { UpdateCandidacyDto } from './dto/update-candidacy.dto';
 export class CandidacyController {
   constructor(private readonly candidacyService: CandidacyService) {}
 
+  @Post('apply')
+  async applyForJob(@Body('candidateId') candidateId: number, @Body('jobId') jobId: number) {
+    return await this.candidacyService.applyForJob(candidateId, jobId);
+  }
+
   @Post()
   create(@Body() createCandidacyDto: CreateCandidacyDto) {
     return this.candidacyService.create(createCandidacyDto);

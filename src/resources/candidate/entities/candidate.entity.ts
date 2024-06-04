@@ -16,7 +16,7 @@ export class Candidate extends Utilizador {
 
   @OneToMany(
     () => Candidate_Candidacy,
-    (candidate_candidacy) => candidate_candidacy.Candidate_candidate_id,
+    (candidate_candidacy) => candidate_candidacy.candidate,
     { cascade: true, eager: true },
   )
   candidate_candidacy: Candidate_Candidacy[];
