@@ -9,8 +9,7 @@ import { SelectionProcessService } from 'src/resources/selection_process/selecti
 
 @Injectable()
 export class SelectionPhaseService {
-  constructor() // private readonly candidateService: CandidateService, // private readonly selectionProcessRepository: Repository<SelectionProcess>, // @InjectRepository(SelectionProcess)
-  // private readonly selectionProcessService: SelectionProcessService,
+  constructor() // private readonly selectionProcessService: SelectionProcessService, // private readonly candidateService: CandidateService, // private readonly selectionProcessRepository: Repository<SelectionProcess>, // @InjectRepository(SelectionProcess)
   {}
 
   // async processSelectionPhase(createSelectionphaseDto: CreateSelectionphaseDto) {
@@ -59,7 +58,7 @@ export class SelectionPhaseService {
     return `This action updates a #${id} recruiter`;
   }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} recruiter`;
-  // }
+  remove(id: number) {
+    return `This action removes a #${id} recruiter`;
+  }
 }

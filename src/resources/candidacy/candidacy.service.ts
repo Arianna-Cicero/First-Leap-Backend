@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateCandidacyDto } from './dto/create-candidacy.dto';
 import { UpdateCandidacyDto } from './dto/update-candidacy.dto';
-import { SelectionProcessService } from 'src/resources/selection_process/selection_process.service';
 
 @Injectable()
 export class CandidacyService {
