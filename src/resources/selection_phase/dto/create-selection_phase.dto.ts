@@ -1,20 +1,20 @@
-import { IsString, IsInt,Min, MinLength, MaxLength } from 'class-validator';
+import { IsString, IsInt, Min, MinLength, MaxLength } from 'class-validator';
 
 export class CreateSelectionphaseDto {
-    @IsInt()
-    SPH : number;
+  @IsInt()
+  SPH: number;
 
-    @IsString()
-    @MinLength(1)
-    @MaxLength(250)
-    description: string;
+  @IsString()
+  @MinLength(1)
+  @MaxLength(250)
+  description: string;
 
-    @IsInt()
-    @Min(1)
-    order : number;
+  @IsInt()
+  @Min(1)
+  order: number;
 
-    @IsString()
-    @MinLength(1)
-    @MaxLength(250)
-    process: string;
+  @IsString()
+  @MinLength(1)
+  @MaxLength(250)
+  process: string;
 }

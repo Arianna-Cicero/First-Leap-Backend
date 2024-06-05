@@ -8,7 +8,6 @@ import { CandidateService } from '../candidate/candidate.service';
 import { EmailService } from 'src/mailer/sendMail';
 import { Candidate } from '../candidate/entities/candidate.entity';
 import { ResumeParse } from 'src/cv_validation/resume_parse';
-import { SelectionProcessService } from '../selection_process/selection_process.service';
 import { SelectionProcess } from '../selection_process/entities/selection_process.entity';
 import { CreateSelectionprocessDto } from '../selection_process/dto/create-selection_process.dto';
 import { Vacancy } from '../vancancy/entities/vacancy.entity';
@@ -16,7 +15,6 @@ import { CreateVacancyDto } from '../vancancy/dto/create-vacancy.dto';
 import { Recruiter } from '../recruiter/entities/recruiter.entity';
 import { CreateRecruiterDto } from '../recruiter/dto/create-recruiter.dto';
 import { CreateUtilizadorDto } from '../utilizador/dto/create-utilizador.dto';
-import { EmailverificationService } from '../emailverification/emailverification.service';
 
 @Injectable()
 export class JobOfferService {
@@ -58,6 +56,7 @@ export class JobOfferService {
     await this.entityManger.save(savedJobOffer);
 
     //recruiter
+    //TODO, nao posso criar recruiter
     const recruiter = new Recruiter(createRecruiterDto, createUtilizadorDto);
     vacancy.joboffer = savedJobOffer;
     const savedRecruiter = await this.entityManger.save(recruiter);
@@ -233,5 +232,4 @@ export class JobOfferService {
       await this.sendFeedback(candidate.User_id, 'not_selected');
     }
   }
-  
 }

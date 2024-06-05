@@ -1,3 +1,4 @@
+import { SelectionPhase } from '@src/resources/selection_phase/entities/selection_phase.entity';
 import { SelectionProcess } from 'src/resources/selection_process/entities/selection_process.entity';
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -9,11 +10,8 @@ export class TypeSelectionProcess {
   @Column()
   description: string;
 
-  @OneToOne(
-    () => SelectionProcess,
-    (selectionProcess) => selectionProcess.type_sp,
-  )
-  selectionProcess: SelectionProcess[];
+  @OneToOne(() => SelectionPhase, (selectionPhase) => selectionPhase.type_sd)
+  selectionPhase: SelectionPhase;
 
   constructor(type_selection_process: Partial<TypeSelectionProcess>) {
     Object.assign(this, type_selection_process);
