@@ -96,6 +96,16 @@ export class CandidateService {
     });
   }
 
+  async findIdByUser(user: string) {
+    const candidate = await this.candidateRepository.findOne({
+      where: { username: user },
+      select: ['User_id'],
+    });
+    const userId = candidate?.User_id;
+    console.log('User ID:', userId); // Log the user ID
+    return userId; // Return User_id if candidate exists, otherwise undefined
+  }
+
   async findCandidateEmail(id: number) {
     return await this.candidateRepository.findOne({
       where: { User_id: id },

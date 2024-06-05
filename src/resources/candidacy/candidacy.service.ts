@@ -1,37 +1,33 @@
-import { Injectable } from '@nestjs/common';
-import { CreateCandidacyDto } from './dto/create-candidacy.dto';
-import { UpdateCandidacyDto } from './dto/update-candidacy.dto';
+import { Module, forwardRef } from '@nestjs/common';
+import { CandidacyController } from './candidacy.controller';
+import { CandidacyService } from './candidacy.service';
+import { Candidacy } from './entities/candidacy.entity';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { JobOfferService } from '../job_offer/job_offer.service';
+import { CandidateService } from '../candidate/candidate.service';
+import { JobOfferModule } from '../job_offer/job_offer.module';
+import { EmailService } from '@src/mailer/sendMail';
+import { UtilizadorService } from '../utilizador/utilizador.service';
+import { EmailverificationService } from '../emailverification/emailverification.service';
+import { UtilizadorModule } from '../utilizador/utilizador.module';
+import { EmailverificationModule } from '../emailverification/emailverification.module';
 
-@Injectable()
-export class CandidacyService {
-  constructor() {} // private readonly selectionProcessService: SelectionProcessService, // Inject the SelectionProcessService
-  async create(createCandidacyDto: CreateCandidacyDto) {
-    // Create an instance of CreateCandidacyDto (if needed)
-    //const candidacy = new CreateCandidacyDto();
-
-    // Create a new selection process using the SelectionProcessService
-    // const newSelectionProcess = await this.selectionProcessService.create(
-    // createCandidacyDto.selectionProcess,
-    // ); // Assuming selection process data is included in the candidacy DTO
-
-    // Perform any necessary operations with the instances
-
-    return 'This action adds a new candidacy and selection process';
-  }
-
-  findAll() {
-    return `This action returns all candidacy`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} candidacy`;
-  }
-
-  update(id: number, updateCandidacyDto: UpdateCandidacyDto) {
-    return `This action updates a #${id} candidacy`;
-  }
-
-  // remove(id: number) {
-  //   return `This action removes a #${id} candidacy`;
-  // }
-}
+@Module({
+  imports: [
+    TypeOrmModule.forFeature([Candidacy]),
+    forwardRef(() => JobOfferModule),
+    forwardRef(() => UtilizadorModule),
+    forwardRef(() => EmailverificationModule),
+  ],
+  controllers: [CandidacyController],
+  providers: [
+    CandidacyService,
+    JobOfferService,
+    CandidateService,
+    EmailService,
+    UtilizadorService,
+    // EmailverificationService,
+  ],
+  exports: [CandidacyService], // Export CandidacyService if needed by other modules
+})
+export class CandidacyModule {}

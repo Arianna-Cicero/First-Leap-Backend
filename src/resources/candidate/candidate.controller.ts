@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  NotFoundException,
 } from '@nestjs/common';
 import { CandidateService } from './candidate.service';
 import { CreateCandidateDto } from './dto/create-candidate.dto';
@@ -31,6 +32,22 @@ export class CandidateController {
   @Post('verify-email')
   async verifyEmail(@Body() body: { codigo: number; userId: number }) {
     return this.candidateService.emailverification(body.codigo, body.userId);
+  }
+
+
+  @Get('find-id/:username')
+  async findIdByUser(@Param('username') username: string) {
+    try {
+      const userId = await this.candidateService.findIdByUser(username);
+      if (userId) {
+        return { userId };
+      } else {
+        throw new NotFoundException('User not found');
+      }
+    } catch (error) {
+      console.error('Error finding user ID:', error);
+      throw new NotFoundException('User not found');
+    }
   }
 
   @Get()
