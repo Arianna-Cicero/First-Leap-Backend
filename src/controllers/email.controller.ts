@@ -1,19 +1,51 @@
-// import { Controller, Post } from '@nestjs/common';
-// import { EmailService } from './../services/email.service';
+import { Controller, Post, Body } from '@nestjs/common';
+import { EmailService } from '@src/mailer/sendMail';
 
-// @Controller('email')
-// export class EmailController {
-//   constructor(private readonly emailService: EmailService) {}
+@Controller('email')
+export class EmailController {
+  constructor(private readonly emailService: EmailService) {}
 
-//   @Post('send')
-//   async sendEmail() {
-//     const to = 'xyz@xyz.com';
-//     const subject = 'Validation Code';
-//     const text = 'Here is your validation code xxx-xxx';
-//     const html = '<b>testtest?</b>';
+  @Post('send-calendar-invite')
+  async sendCalendarInviteWithEmail(@Body() body: any) {
+    const {
+      to,
+      subject,
+      description,
+      startTime,
+      endTime,
+      emailSubject,
+      emailText,
+      emailHtml,
+    } = body;
 
-//     await this.emailService.sendEmail(to, subject, text, html);
-//   }
-// }
+    if (
+      !to ||
+      !subject ||
+      !description ||
+      !startTime ||
+      !endTime ||
+      !emailSubject ||
+      !emailText ||
+      !emailHtml
+    ) {
+      return { message: 'Missing required fields.' };
+    }
 
-// module.exports = EmailController;
+    try {
+      await this.emailService.sendCalendarInviteWithEmail(
+        to,
+        subject,
+        description,
+        new Date(startTime),
+        new Date(endTime),
+        emailSubject,
+        emailText,
+        emailHtml,
+      );
+      return { message: 'Email with calendar invite sent successfully.' };
+    } catch (error) {
+      console.error('Error sending email with calendar invite:', error);
+      return { message: 'Failed to send email with calendar invite.' };
+    }
+  }
+}
