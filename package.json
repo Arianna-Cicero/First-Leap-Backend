@@ -62,8 +62,9 @@
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
     "schedule": "^0.5.0",
-    "textract": "^2.5.0",
+    "textract": "^0.20.0",
     "typeorm": "^0.3.20",
+    "vm2": "^3.9.19",
     "xmldom": "^0.6.0"
   },
   "devDependencies": {

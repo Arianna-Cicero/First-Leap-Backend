@@ -67,7 +67,8 @@ export class EmailService {
     description: string,
     startTime: Date,
     endTime: Date,
-  ): Promise<void> {
+    eventId: string, // New parameter to identify the event
+  ): Promise<string> {
     const calendar = google.calendar({
       version: 'v3',
       auth: this.oauth2Client,
@@ -96,8 +97,61 @@ export class EmailService {
       });
 
       console.log('Calendar invite sent: ', response.data);
+
+      // Return the event ID
+      return response.data.id;
     } catch (error) {
       console.error('Error sending calendar invite:', error);
+      throw error; // Rethrow the error
+    }
+  }
+
+  async handleRSVPResponse(eventId: string, response: string): Promise<void> {
+    try {
+      // Logic to handle the RSVP response
+      if (response === 'yes') {
+        // Accept the invitation
+        console.log('Accepted invitation for event:', eventId);
+      } else if (response === 'no') {
+        // Decline the invitation
+        console.log('Declined invitation for event:', eventId);
+      } else {
+        console.error('Invalid RSVP response:', response);
+      }
+    } catch (error) {
+      console.error('Error handling RSVP response:', error);
+      throw error; // Rethrow the error
+    }
+  }
+
+  async sendCalendarInviteWithEmail(
+    to: string,
+    subject: string,
+    description: string,
+    startTime: Date,
+    endTime: Date,
+    emailSubject: string,
+    emailText: string,
+    emailHtml: string,
+  ): Promise<string> {
+    try {
+      // First, send the email
+      await this.sendEmail(to, emailSubject, emailText, emailHtml);
+
+      // Then, send the calendar invite
+      const eventId = await this.sendCalendarInvite(
+        to,
+        subject,
+        description,
+        startTime,
+        endTime,
+        'eventId_placeholder', // Replace with actual event ID
+      );
+
+      return eventId;
+    } catch (error) {
+      console.error('Error sending email with calendar invite:', error);
+      throw error; // Rethrow the error
     }
   }
 
