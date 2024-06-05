@@ -25,7 +25,8 @@ import { VacancyModule } from './resources/vancancy/vacancy.module';
 import { ResultModule } from './resources/result/result.module';
 import { SchedulerModule } from './modules/scheduler.module';
 import { TypeSelectionProcessModule } from './resources/type_selection_process/type_selection_process.module';
-import { QuizModule } from './resources/type_selection_process/quiz/quiz.module';
+import { ChallengeModule } from './resources/challenges/challenge.module';
+import { WrittenTestsModule } from './resources/written_tests/written_tests.module';
 
 @Module({
   imports: [
@@ -50,7 +51,8 @@ import { QuizModule } from './resources/type_selection_process/quiz/quiz.module'
     ResultModule,
     SchedulerModule,
     TypeSelectionProcessModule,
-    QuizModule,
+    ChallengeModule,
+    WrittenTestsModule,
   ],
   controllers: [AppController, HealthController],
   providers: [
