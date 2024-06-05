@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSelectionprocessDto } from './dto/create-selection_process.dto';
 import { UpdateSelectionprocessDto } from './dto/update-selection_process.dto';
 import { SelectionProcess } from './entities/selection_process.entity';
@@ -32,7 +32,13 @@ export class SelectionProcessService {
     id: number,
     updateSelectionprocessDto: UpdateSelectionprocessDto,
   ) {
-    return `This action updates a #${id} Selectionprocess`;
+    const selectionProcess = await this.findOne(id);
+    if (!selectionProcess) {
+      throw new NotFoundException(`SelectionProcess with id ${id} not found`);
+    }
+    Object.assign(selectionProcess, updateSelectionprocessDto);
+    await this.spRepository.save(selectionProcess);
+    return selectionProcess;
   }
 
   async remove(id: number) {

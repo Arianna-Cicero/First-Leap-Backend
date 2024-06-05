@@ -16,28 +16,28 @@ export class JobOffer {
   @PrimaryGeneratedColumn({ type: 'int' })
   JO_id: number;
 
-  @Column({ type: 'char', length: 50, nullable:true })
+  @Column({ type: 'char', length: 50, nullable: true })
   title: string;
 
-  @Column({ type: 'char', length: 250, nullable:true})
+  @Column({ type: 'char', length: 250, nullable: true, default: true })
   description: string;
 
-  @Column({ type: 'char', length: 250, nullable:true })
+  @Column({ type: 'char', length: 250, nullable: true })
   requisites: string;
 
-  @Column({ type: 'char', length: 250, nullable:true })
+  @Column({ type: 'char', length: 250, nullable: true })
   responsibilities: string;
 
-  @Column({ type: 'char', length: 250, nullable:true })
+  @Column({ type: 'char', length: 250, nullable: true })
   benefits: string;
 
-  @Column({ type: 'char', length: 15 , default: true, nullable:true})
-  status: string; 
+  @Column({ type: 'char', length: 15, default: true, nullable: true })
+  status: string;
 
   @CreateDateColumn({ type: 'datetime' })
   date_created: Date;
 
-  @Column({ type: 'date', nullable:true})
+  @Column({ type: 'date', nullable: true })
   deadline: Date;
 
   @ManyToOne(() => JobType, (jobType) => jobType.jobOffers)

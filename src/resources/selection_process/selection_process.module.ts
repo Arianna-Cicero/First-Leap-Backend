@@ -9,6 +9,7 @@ import { EmailService } from 'src/mailer/sendMail';
 import { JobOfferService } from '../job_offer/job_offer.service';
 import { JobOfferModule } from '../job_offer/job_offer.module';
 import { SchedulerModule } from 'src/modules/scheduler.module';
+import { SelectionPhaseModule } from '../selection_phase/selection_phase.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { SchedulerModule } from 'src/modules/scheduler.module';
     forwardRef(() => CandidateModule),
     forwardRef(() => JobOfferModule),
     forwardRef(() => SchedulerModule),
+    forwardRef(() => SelectionPhaseModule),
   ],
   controllers: [SelectionProcessController],
   providers: [
@@ -24,6 +26,6 @@ import { SchedulerModule } from 'src/modules/scheduler.module';
     EmailService,
     JobOfferService,
   ],
-  exports: [SelectionProcessService],
+  exports: [SelectionProcessService, TypeOrmModule],
 })
 export class SelectionProcessModule {}
