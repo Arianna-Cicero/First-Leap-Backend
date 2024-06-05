@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import { SelectionPhase } from '@src/resources/selection_phase/entities/selection_phase.entity';
-=======
 import { Challenge } from '@src/resources/challenges/entities/challenge.entity';
 import { WrittenTest } from '@src/resources/written_tests/entities/written_test.entity';
->>>>>>> origin/master
 import { SelectionProcess } from 'src/resources/selection_process/entities/selection_process.entity';
 import {
   Column,
@@ -21,8 +17,11 @@ export class TypeSelectionProcess {
   @Column()
   description: string;
 
-  @OneToOne(() => SelectionPhase, (selectionPhase) => selectionPhase.type_sd)
-  selectionPhase: SelectionPhase;
+  @OneToOne(
+    () => SelectionProcess,
+    (selectionProcess) => selectionProcess.type_sp,
+  )
+  selectionProcess: SelectionProcess[];
 
   @OneToMany(() => Challenge, (challenge) => challenge.type)
   challenge: Challenge[];
