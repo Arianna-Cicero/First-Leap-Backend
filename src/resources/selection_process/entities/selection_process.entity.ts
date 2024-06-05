@@ -21,7 +21,7 @@ export class SelectionProcess {
   @Column({ type: 'char', length: 250 })
   description: string;
 
-  @Column({ type: 'int'})
+  @Column({ type: 'int' })
   vacancies: number;
 
   @Column({ type: 'char', length: 250 })
@@ -38,9 +38,6 @@ export class SelectionProcess {
     (selectionPhase) => selectionPhase.selectionProcess,
   )
   selectionPhases: SelectionPhase[];
-
-  @OneToOne(() => TypeSelectionProcess, (type_sp) => type_sp.selectionProcess)
-  type_sp: TypeSelectionProcess;
 
   constructor(selection_process: Partial<SelectionProcess>) {
     Object.assign(this, selection_process);
