@@ -26,15 +26,15 @@ export class JobOfferController {
     @Body() createJobOfferDto: CreateJobOfferDto,
     createSelectionprocessDto: CreateSelectionprocessDto,
     createVacancyDto: CreateVacancyDto,
-    createRecruiterDto: CreateRecruiterDto,
-    createUtilizadorDto: CreateUtilizadorDto,
+    // createRecruiterDto: CreateRecruiterDto,
+    // createUtilizadorDto: CreateUtilizadorDto,
   ) {
     return this.jobOfferService.create(
       createJobOfferDto,
       createSelectionprocessDto,
       createVacancyDto,
-      createRecruiterDto,
-      createUtilizadorDto,
+      // createRecruiterDto,
+      // createUtilizadorDto,
     );
   }
 

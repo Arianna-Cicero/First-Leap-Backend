@@ -8,16 +8,19 @@ import { CandidateService } from '../candidate/candidate.service';
 import { JobOfferModule } from '../job_offer/job_offer.module';
 import { EmailService } from '@src/mailer/sendMail';
 import { UtilizadorService } from '../utilizador/utilizador.service';
-import { EmailverificationService } from '../emailverification/emailverification.service';
 import { UtilizadorModule } from '../utilizador/utilizador.module';
 import { EmailverificationModule } from '../emailverification/emailverification.module';
+import { CandidateCandidacyService } from '../candidate_candidacy/candidate_candidacy.service';
+import { CandidateCandidacyModule } from '../candidate_candidacy/candidate_candidacy.module';
+import { Candidate_Candidacy } from '../candidate_candidacy/entities/candidate_candidacy.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Candidacy]),
+    TypeOrmModule.forFeature([Candidacy, Candidate_Candidacy]),
     forwardRef(() => JobOfferModule),
     forwardRef(() => UtilizadorModule),
     forwardRef(() => EmailverificationModule),
+    forwardRef(() => CandidateCandidacyModule),
   ],
   controllers: [CandidacyController],
   providers: [
@@ -26,8 +29,8 @@ import { EmailverificationModule } from '../emailverification/emailverification.
     CandidateService,
     EmailService,
     UtilizadorService,
-    // EmailverificationService,
+    CandidateCandidacyService,
   ],
-  exports: [CandidacyService], // Export CandidacyService if needed by other modules
+  exports: [CandidacyService, TypeOrmModule],
 })
 export class CandidacyModule {}

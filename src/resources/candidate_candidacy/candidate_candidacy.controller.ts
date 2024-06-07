@@ -18,22 +18,24 @@ export class CandidateCandidacyController {
   ) {}
 
   @Post()
-  create(@Body() createCandidateCandidacyDto: CreateCandidateCandidacyDto) {
+  async create(
+    @Body() createCandidateCandidacyDto: CreateCandidateCandidacyDto,
+  ) {
     return this.candidateCandidacyService.create(createCandidateCandidacyDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.candidateCandidacyService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string) {
     return this.candidateCandidacyService.findOne(+id);
   }
 
   @Patch(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body() updateCandidateCandidacyDto: UpdateCandidateCandidacyDto,
   ) {
@@ -43,8 +45,8 @@ export class CandidateCandidacyController {
     );
   }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.candidateCandidacyService.remove(+id);
-  // }
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.candidateCandidacyService.remove(+id);
+  }
 }
