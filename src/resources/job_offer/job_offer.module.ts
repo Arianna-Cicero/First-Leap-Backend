@@ -13,6 +13,7 @@ import { EntityManager } from 'typeorm';
 import { UtilizadorService } from '../utilizador/utilizador.service';
 import { EmailverificationService } from '../emailverification/emailverification.service';
 import { UtilizadorModule } from '../utilizador/utilizador.module';
+import { CandidacyModule } from '../candidacy/candidacy.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { UtilizadorModule } from '../utilizador/utilizador.module';
     forwardRef(() => CandidateModule),
     forwardRef(() => JobOfferModule),
     forwardRef(() => UtilizadorModule),
+    forwardRef(() => CandidacyModule),
   ],
   controllers: [JobOfferController],
   providers: [

@@ -38,16 +38,16 @@ export class CandidacyController {
     return this.candidacyService.findOne(+id);
   }
 
-  // @Patch(':id')
-  // async update(
-  //   @Param('id') id: string,
-  //   @Body() updateCandidacyDto: UpdateCandidacyDto,
-  // ) {
-  //   return this.candidacyService.update(+id, updateCandidacyDto);
-  // }
-
-  @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return this.candidacyService.remove(+id);
+  @Patch(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateCandidacyDto: UpdateCandidacyDto,
+  ) {
+    return this.candidacyService.update(+id, updateCandidacyDto);
   }
+
+  // @Delete(':id')
+  // async remove(@Param('id') id: string) {
+  //   return this.candidacyService.remove(+id);
+  // }
 }

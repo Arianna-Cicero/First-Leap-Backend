@@ -32,36 +32,29 @@ export class JobOfferService {
     createJobOfferDto: CreateJobOfferDto,
     createSelectionProcessDto: CreateSelectionprocessDto,
     createVacancyDto: CreateVacancyDto,
-    createRecruiterDto: CreateRecruiterDto,
-    createUtilizadorDto: CreateUtilizadorDto,
+    // recruiterUserId: number // Accept User_id of the existing recruiter
   ): Promise<{ id: number }> {
-    const joboffer = new JobOffer(createJobOfferDto);
-    const savedJobOffer = await this.entityManger.save(joboffer);
+    const jobOffer = new JobOffer(createJobOfferDto);
+    const savedJobOffer = await this.entityManger.save(jobOffer);
 
-    //sel process
+    // Create and save selection process
     const selectionProcess = new SelectionProcess(createSelectionProcessDto);
     selectionProcess.job_offer = savedJobOffer;
     const savedSelectionProcess =
       await this.entityManger.save(selectionProcess);
-    //añade al jobofer el sel process
     savedJobOffer.selectionProcess = [savedSelectionProcess];
     await this.entityManger.save(savedJobOffer);
 
-    //vacancy
+    // Create and save vacancy
     const vacancy = new Vacancy(createVacancyDto);
     vacancy.joboffer = savedJobOffer;
     const savedVacancy = await this.entityManger.save(vacancy);
-    //añade al jobofer al vacancy
     savedJobOffer.vacancy = [savedVacancy];
     await this.entityManger.save(savedJobOffer);
 
-    //recruiter
-    //TODO, nao posso criar recruiter
-    const recruiter = new Recruiter(createRecruiterDto, createUtilizadorDto);
-    vacancy.joboffer = savedJobOffer;
-    const savedRecruiter = await this.entityManger.save(recruiter);
-    //añade al jobofer al recruiter
-    savedJobOffer.recruiter = savedRecruiter;
+    // Assign existing recruiter to the job offer
+    // savedJobOffer.recruiter = { User_id: recruiterUserId }; // Assign User_id directly
+
     await this.entityManger.save(savedJobOffer);
 
     if (savedJobOffer) {

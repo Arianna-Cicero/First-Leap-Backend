@@ -38,8 +38,8 @@ export class AddressController {
     return this.addressService.update(+id, updateAddressDto);
   }
 
-  // @Delete(':id')
-  // async remove(@Param('id') id: string) {
-  //   return this.addressService.remove(+id);
-  // }
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.addressService.remove(+id);
+  }
 }

@@ -13,7 +13,7 @@ export class AddressService {
     private readonly addressRepository: Repository<Address>,
     private readonly entityManager: EntityManager,
   ) {}
-  
+
   async create(createAddressDto: CreateAddressDto) {
     const address = new Address(createAddressDto);
     await this.addressRepository.save(address);
@@ -42,7 +42,7 @@ export class AddressService {
     return addressUpdated;
   }
 
-  // async remove(id: number) {
-  //   return await this.addressRepository.delete(id);
-  // }
+  async remove(id: number) {
+    return await this.addressRepository.delete(id);
+  }
 }
